@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+.content h1 {
+  color: rgb(0, 0, 0);
+}
+
+.nav {
+  margin-top: 58px;
+}
+.nav h1 {
+  margin-bottom: 10px;
+}
+
+.nav-item a {
+  font-family: Oxygen, sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  color: #565b5e;
+  margin-left: 25px;
+}
+.nav-item a:hover {
+  text-decoration: underline;
+}
+
+.carousel {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.content h1 {
+  margin-top: 60px;
+}
+.content .card-row {
+  margin-top: 32px;
+}
+.content .btn-selengkapnya {
+  margin-top: 76px;
+  margin-bottom: 43px;
+}
+
+.foot-info {
+  width: 100%;
+  height: 174px;
+  background-color: #9C9C9C;
+}
+.foot-info .container {
+  padding-top: 30px;
+}/*# sourceMappingURL=main.css.map */
