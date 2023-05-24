@@ -1,5 +1,6 @@
 <?php 
 include('includes/connect.php');
+include('functions/common_function.php')
 
 ?>
 
@@ -78,73 +79,8 @@ include('includes/connect.php');
       <div class="row justify-content-center card-row">
       <!-- Fetching Products -->
       <?php 
-        $select_query = "SELECT * FROM products";
-        $result_query = mysqli_query($con, $select_query);
-        // $row = mysqli_fetch_assoc($result_query);
-        // echo $row['product_title'];
-        while($row = mysqli_fetch_assoc($result_query)){
-          $product_id = $row['product_id'];
-          $product_title = $row['product_title'];
-          $product_desc = $row['product_desc'];
-          $product_image1 = $row['product_image1'];
-          $product_price = $row['product_price'];
-          $category_id = $row['category_id'];
-          $brand_id = $row['brand_id'];
-          echo 
-          "
-            <div class='col-md-3'>
-              <div class='cardbox-group'>
-                <div class='card' style='width: 18rem;'>
-                  <img src='...' class='card-img-top' alt='...'>
-                  <div class='card-body'>
-                    <h5 class='card-title'>Card title</h5>
-                    <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href='#' class='btn btn-primary'>Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-            </div>       
-          ";
-        }
+        get_products();
       ?>
-
-        <div class="col-md-3">
-          <div class="cardbox-group">
-            <div class="card" style="width: 18rem;">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div class="col-md-3">
-        <div class="cardbox-group">
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="cardbox-group">
-          <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
       <!-- Cardbox Group 2 -->
       <div class="row justify-content-center card-row">
         <div class="col-md-3">

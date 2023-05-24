@@ -21,7 +21,7 @@
         $temp_image3 = $_FILES['product_image3']['tmp_name'];
 
         // Checking Empty Condition
-        if($product_title == '' or $product_desc == '' or  $product_keyw =='' or $product_categories =='' or $product_brands =='' or $product_price =='' or $product_image1 =='' or $product_image2 =='' or $product_image3 ==''){
+        if($product_title == '' or $product_desc == '' or  $product_keyw =='' or $product_categories =='' or $product_brands =='' or $product_price =='' or $product_image1 ==''){
             echo "<script>alert('Please fill all the empty')</script>";
         }
         else {
@@ -112,12 +112,12 @@
 
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for="product-image2" class="from-label"> Product Image 2</label>
-                <input type="file" accept="image/*"  name="product_image2" id="product_image2" class="form-control" required="required">
+                <input type="file" accept="image/*"  name="product_image2" id="product_image2" class="form-control">
             </div> 
 
             <div class="form-outline mb-4 w-50 m-auto">
                 <label for="product-image3" class="from-label"> Product Image 3</label>
-                <input type="file"  accept="image/*" name="product_image3" id="product_image3" class="form-control" required="required">
+                <input type="file"  accept="image/*" name="product_image3" id="product_image3" class="form-control">
             </div> 
 
             <!-- Product Price -->
