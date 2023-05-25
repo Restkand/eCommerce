@@ -32,7 +32,7 @@ include('functions/common_function.php')
           </div>
           <div class="row">
               <div class="col nav-item text-center">
-                  <a href="menuBelanja.php">Belanja</a>
+                  <a href="#">Belanja</a>
                   <a href="#">Hubungi Kami</a>
                   <a  href="#">Cari Lokasi Toko</a>
                   <a href="#">Tentang Kami</a>
@@ -82,8 +82,6 @@ include('functions/common_function.php')
         get_products();
         get_uniqe_categories()
       ?>
-
-      
       <!-- Cardbox Group 2 -->
       <div class="row justify-content-center card-row">
         <div class="col-md-3">
@@ -125,7 +123,7 @@ include('functions/common_function.php')
       </div>
       <div class="row btn-selengkapnya">
         <div class="col-12 text-center">
-          <button type="button" class="btn btn-secondary"><a href="menuBelanja.php">Lihat Semua</a></button>
+          <button type="button" class="btn btn-secondary">Lihat Semua</button>
         </div>
       </div>
     </div>

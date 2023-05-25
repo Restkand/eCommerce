@@ -9,6 +9,21 @@ $mainFontSize: 20px;
     h1{
         color: $mainColor;
     }
+
+    .cardbox-group {
+        a{
+            text-decoration: none;
+            color: $mainColor;
+        }
+
+        a:hover {
+            
+            h5 {
+                text-decoration: underline;
+        
+            }
+        }
+    }
 }
 
 .nav {
@@ -50,6 +65,11 @@ $mainFontSize: 20px;
     .btn-selengkapnya{
         margin-top: 76px;
         margin-bottom: 43px;
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
     }
 }
 

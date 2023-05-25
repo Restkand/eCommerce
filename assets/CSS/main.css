@@ -2,6 +2,13 @@
 .content h1 {
   color: rgb(0, 0, 0);
 }
+.content .cardbox-group a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+.content .cardbox-group a:hover h5 {
+  text-decoration: underline;
+}
 
 .nav {
   margin-top: 58px;
@@ -35,6 +42,10 @@
 .content .btn-selengkapnya {
   margin-top: 76px;
   margin-bottom: 43px;
+}
+.content .btn-selengkapnya a {
+  text-decoration: none;
+  color: white;
 }
 
 .foot-info {
