@@ -32,7 +32,7 @@ include('functions/common_function.php')
           </div>
           <div class="row">
               <div class="col nav-item text-center">
-                  <a href="menuBelanja.php" class="link">BELANJA</a>
+                  <a href="products.php" class="link">BELANJA</a>
                   <a href="#">HUBUNGI KAMI</a>
                   <a  href="#">CARI LOKASI TOKO</a>
                   <a href="#">TENTANG KAMI</a>
@@ -125,7 +125,7 @@ include('functions/common_function.php')
       </div>
       <div class="row btn-selengkapnya">
         <div class="col-12 text-center">
-          <button type="button" class="btn btn-secondary"><a href="menuBelanja.php" class="link">Lihat Semua</a></button>
+          <button type="button" class="btn btn-secondary"><a href="products.php" class="link">Lihat Semua</a></button>
         </div>
       </div>
     </div>

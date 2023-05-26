@@ -32,7 +32,7 @@ include('functions/common_function.php')
           </div>
           <div class="row">
               <div class="col nav-item text-center">
-                  <a href="menuBelanja.php" class="activeNav">BELANJA</a>
+                  <a href="products.php" class="activeNav">BELANJA</a>
                   <a href="#">HUBUNGI KAMI</a>
                   <a  href="#">CARI LOKASI TOKO</a>
                   <a href="#">TENTANG KAMI</a>
@@ -65,7 +65,7 @@ include('functions/common_function.php')
         <div class="col-sm-4 mb-4">
           <!-- <label for="option2">Brand :</label> -->
             <?php
-            select_brand();
+            select_gender();
             ?>
           </select>
         </div>

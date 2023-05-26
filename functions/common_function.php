@@ -9,7 +9,7 @@ function get_products(){
 
         // Condition if Isset or Not
         if(!isset($_GET['category'])){
-          if(!isset($_GET['brand'])){
+          if(!isset($_GET['gender'])){
             $select_query = "SELECT * FROM products ORDER BY product_id DESC LIMIT 6";
             $result_query = mysqli_query($con, $select_query);
             // $row = mysqli_fetch_assoc($result_query);
@@ -22,7 +22,7 @@ function get_products(){
               $product_price = $row['product_price'];
               $formatted_price = number_format($product_price, 0, ',','.');
               $category_id = $row['category_id'];
-              $brand_id = $row['brand_id'];
+              $gender_id = $row['gender_id'];
               echo 
               "
                   <div class='col-md-3'>
@@ -61,7 +61,7 @@ function get_uniqe_categories(){
       $product_price = $row['product_price'];
       $formatted_price = number_format($product_price, 0, ',','.');
       $category_id = $row['category_id'];
-      $brand_id = $row['brand_id'];
+      $gender_id = $row['gender_id'];
       echo 
       "
           <div class='col-md-3'>
@@ -104,25 +104,25 @@ function select_category(){
       document.querySelector('.product_category').addEventListener('change', function() {
           var category_id = this.value;
           if (category_id !== '0') {
-              window.location.href = 'menuBelanja.php?category=' + encodeURIComponent(category_id);
+              window.location.href = 'products.php?category=' + encodeURIComponent(category_id);
           } else {
-              window.location.href = 'menuBelanja.php'; // Redirect to the default URL when 'Semua Kategori' is selected
+              window.location.href = 'products.php'; // Redirect to the default URL when 'Semua Kategori' is selected
           }
       });
   </script>";  
 }
 
 
-function select_brand(){
+function select_gender(){
   global $con;
-  echo "<select name='product_brands' id='' class='form-control product_brand'>";
-  $select_query = "SELECT * FROM brands";
+  echo "<select name='product_genders' id='' class='form-control product_gender'>";
+  $select_query = "SELECT * FROM genders";
   $result_query = mysqli_query($con, $select_query);
-  echo "<option value='0'>Semua Brand</option>";
+  echo "<option value='0'>Semua Gender</option>";
   while ($row = mysqli_fetch_assoc($result_query)) {
-      $brand_title = $row['brand_title'];
-      $brand_id = $row['brand_id'];
-      echo "<option value='$brand_id'>$brand_title</option>";
+      $gender_product = $row['gender_product'];
+      $gender_id = $row['gender_id'];
+      echo "<option value='$gender_id'>$gender_product</option>";
   }
   echo "</select>";
 }

@@ -7,6 +7,7 @@
         $product_keyw =$_POST['product_keyw'];
         $product_categories =$_POST['product_categories'];
         $product_brands =$_POST['product_brands'];
+        $product_genders =$_POST['product_genders'];
         $product_price =$_POST['product_price'];
         $product_status="true";
     
@@ -21,7 +22,7 @@
         $temp_image3 = $_FILES['product_image3']['tmp_name'];
 
         // Checking Empty Condition
-        if($product_title == '' or $product_desc == '' or  $product_keyw =='' or $product_categories =='' or $product_brands =='' or $product_price =='' or $product_image1 ==''){
+        if($product_title == '' or $product_desc == '' or  $product_keyw =='' or $product_categories =='' or $product_brands =='' or $product_genders =='' or $product_price =='' or $product_image1 ==''){
             echo "<script>alert('Please fill all the empty')</script>";
         }
         else {
@@ -30,7 +31,7 @@
             move_uploaded_file($temp_image3, "../assets/img/product_images/$product_image3");
         
             //  insert query
-            $insert_products = "INSERT INTO products (product_title,product_desc,product_keywords,category_id,brand_id,product_image1,product_image2,product_image3,product_price,date,status) values ('$product_title','$product_desc', '$product_keyw', '$product_categories', '$product_brands', '$product_image1', '$product_image2', '$product_image3', '$product_price', NOW(),'$product_status')";
+            $insert_products = "INSERT INTO products (product_title,product_desc,product_keywords,category_id,brand_id,gender_id,product_image1,product_image2,product_image3,product_price,date,status) values ('$product_title','$product_desc', '$product_keyw', '$product_categories', '$product_brands','$product_genders', '$product_image1', '$product_image2', '$product_image3', '$product_price', NOW(),'$product_status')";
             $result_query = mysqli_query($con,$insert_products);
             if($result_query){
                 echo "<script>alert('products has been inserted successfully')</script>";
@@ -87,8 +88,8 @@
                     ?>
                 </select>
             </div>
-
-            <!-- Brands -->
+            
+                <!-- Brands -->
             <div class="form-outline mb-4 w-50 m-auto">
                 <select name="product_brands" id="" class="product_brand">
                     <option value="">Select a Brands</option>
@@ -99,6 +100,22 @@
                             $brand_title = $row['brand_title'];
                             $brand_id = $row['brand_id'];
                             echo "<option value='$brand_id'>$brand_title</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+
+            <!-- Genders -->
+            <div class="form-outline mb-4 w-50 m-auto">
+                <select name="product_genders" id="" class="product_gender">
+                    <option value="">Select a Genders</option>
+                    <?php 
+                        $select_query = "SELECT * FROM genders";
+                        $result_query = mysqli_query($con,$select_query);
+                        while($row = mysqli_fetch_assoc($result_query)){
+                            $gender_product = $row['gender_product'];
+                            $gender_id = $row['gender_id'];
+                            echo "<option value='$gender_id'>$gender_product</option>";
                         }
                     ?>
                 </select>
