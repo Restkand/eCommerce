@@ -72,7 +72,7 @@ include('functions/common_function.php');
         <div class="col-sm-4 mb-4">
           <!-- <label for="option3">Label 3:</label> -->
           <div class="input-group">
-            <form class="d-flex" action="search_product.php" method="get">
+            <form class="d-flex" action="" method="get">
             <input type="text" id="option3" class="form-control" placeholder="Search" name="search_data">
             <button class="btn btn-outline-secondary" type="submit" value="Search" name="search_data_product">
               <i class="fas fa-search"></i>
@@ -87,7 +87,7 @@ include('functions/common_function.php');
       <div class="row justify-content-center card-row">
       <!-- Fetching Products -->
       <?php 
-        get_product_retail();
+        search_retail_product();
         get_uniqe_retail_brands();
         get_uniqe_retail_genders();
       ?>
