@@ -82,4 +82,48 @@ function get_uniqe_categories(){
   }
 }
 
+
+
+// Select for the Sort Things in menuBelanja
+function select_category(){
+  global $con;
+  echo "<select name='product_categories' id='' class='form-control product_category'>";
+  $select_query = "SELECT * FROM categories";
+  $result_query = mysqli_query($con, $select_query);
+  echo "<option value='0'>Semua Kategori</option>";
+  while ($row = mysqli_fetch_assoc($result_query)) {
+      $category_title = $row['category_title'];
+      $category_id = $row['category_id'];
+      $selected = isset($_GET['category']) && $_GET['category'] == $category_id ? 'selected' : '';
+      echo "<option value='$category_id' $selected>$category_title</option>";
+  }
+  echo "</select>";
+  
+  echo "<script>
+      // Redirect to the selected category's URL when the selection changes
+      document.querySelector('.product_category').addEventListener('change', function() {
+          var category_id = this.value;
+          if (category_id !== '0') {
+              window.location.href = 'menuBelanja.php?category=' + encodeURIComponent(category_id);
+          } else {
+              window.location.href = 'menuBelanja.php'; // Redirect to the default URL when 'Semua Kategori' is selected
+          }
+      });
+  </script>";  
+}
+
+
+function select_brand(){
+  global $con;
+  echo "<select name='product_brands' id='' class='form-control product_brand'>";
+  $select_query = "SELECT * FROM brands";
+  $result_query = mysqli_query($con, $select_query);
+  echo "<option value='0'>Semua Brand</option>";
+  while ($row = mysqli_fetch_assoc($result_query)) {
+      $brand_title = $row['brand_title'];
+      $brand_id = $row['brand_id'];
+      echo "<option value='$brand_id'>$brand_title</option>";
+  }
+  echo "</select>";
+}
 ?>
