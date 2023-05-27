@@ -77,11 +77,12 @@ include('functions/common_function.php')
       </div>
         <!-- Cardbox Group 1 -->
       <div class="row justify-content-center card-row">
-      <!-- Fetching Products -->
-      <?php 
-        get_products();
-        get_uniqe_categories()
-      ?>
+        <!-- Fetching Products -->
+        <?php 
+          get_products();
+          get_uniqe_categories()
+        ?>
+      </div>
 
       
       <!-- Cardbox Group 2 -->

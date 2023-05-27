@@ -28,7 +28,7 @@ function get_products(){
                   <div class='col-md-3'>
                     <div class='cardbox-group'>
                       <div class='card border-0' style='width: 18rem;'>
-                      <a href='#'>
+                      <a href='product_details.php?product_id=$product_id'>
                         <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
                         <div class='card-body'>
                           <h5 class='card-title'>$product_title</h5>
@@ -68,7 +68,7 @@ function get_product_retail(){
               <div class='col-md-3'>
                 <div class='cardbox-group'>
                   <div class='card border-0' style='width: 18rem;'>
-                  <a href='#'>
+                  <a href='product_details.php?product_id=$product_id'>
                     <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
                     <div class='card-body'>
                       <h5 class='card-title'>$product_title</h5>
@@ -108,7 +108,7 @@ function get_uniqe_categories(){
           <div class='col-md-3'>
             <div class='cardbox-group'>
               <div class='card border-0' style='width: 18rem;'>
-              <a href='#'>
+              <a href='product_details.php?product_id=$product_id'>
                 <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
                 <div class='card-body'>
                   <h5 class='card-title'>$product_title</h5>
@@ -151,7 +151,7 @@ function get_uniqe_retail_brands(){
           <div class='col-md-3'>
             <div class='cardbox-group'>
               <div class='card border-0' style='width: 18rem;'>
-              <a href='#'>
+              <a href='product_details.php?product_id=$product_id'>
                 <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
                 <div class='card-body'>
                   <h5 class='card-title'>$product_title</h5>
@@ -193,7 +193,7 @@ function get_uniqe_retail_genders(){
           <div class='col-md-3'>
             <div class='cardbox-group'>
               <div class='card border-0' style='width: 18rem;'>
-              <a href='#'>
+              <a href='product_details.php?product_id=$product_id'>
                 <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
                 <div class='card-body'>
                   <h5 class='card-title'>$product_title</h5>
@@ -321,7 +321,7 @@ function search_retail_product(){
               <div class='col-md-3'>
                 <div class='cardbox-group'>
                   <div class='card border-0' style='width: 18rem;'>
-                  <a href='#'>
+                  <a href='product_details.php?product_id=$product_id'>
                     <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
                     <div class='card-body'>
                       <h5 class='card-title'>$product_title</h5>
@@ -335,6 +335,9 @@ function search_retail_product(){
         }
       }
     }
+
+
+
 
 ?>
 
