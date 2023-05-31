@@ -1,5 +1,6 @@
 <?php 
 include('includes/connect.php');
+include('includes/footer.php');
 include('functions/common_function.php');
 include('functions/details_product_function.php')
 ?>
@@ -10,6 +11,7 @@ include('functions/details_product_function.php')
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=`, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/CSS/main.css">
     <link rel="stylesheet" href="assets/CSS/menuBelanja.css">
     <link rel="stylesheet" href="assets/CSS/details_product.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -27,14 +29,14 @@ include('functions/details_product_function.php')
                       <h1><a class="navbar-brand" href="index.php">LOGO</a></h1>
               </div>
               <div class="col-1">
-                  <a href="#" class="shop-icon" >
-                      <img src="assets/img/fluent-mdl2_shop.png" alt="shop logo">
-                  </a>
+                <?php 
+                  cart_item();
+                ?>
               </div>
           </div>
           <div class="row">
               <div class="col nav-item text-center">
-                  <a href="products.php" class="activeNav">PRODUK</a>
+                  <a href="products.php">PRODUK</a>
                   <a href="#">PRELOVED</a>
                   <a  href="#">CARI LOKASI TOKO</a>
                   <a href="#">TENTANG KAMI</a>
@@ -42,6 +44,11 @@ include('functions/details_product_function.php')
           </div>
       </div>
   </div>
+
+    <!-- cart Function -->
+    <?php 
+    cart();
+    ?>
 
   <hr>
 
@@ -52,20 +59,12 @@ include('functions/details_product_function.php')
     ?>
   </div>
   
-  <footer>
-    <div class="foot-info">
-      <div class="container">
-        <div class="row py-auto">
-          <div class="col-6 offset-2">
-            <h1>LOGO</h1>
-          </div>
-          <div class="col-4">
-            <h1>Social Media</h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+
+
+    <!-- Footer -->
+    <?php 
+        footer()
+    ?>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

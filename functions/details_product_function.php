@@ -75,7 +75,7 @@ function generateProductViewer(){
                   <h2 class="mb-3">'.$product_title.'</h2>
                   <p class="mb-3">'.$product_desc.'</p>
                   <p class="mb-3">'.$formatted_price.'</p>
-                  <button class="add-to-cart-button">Masukan Ke Keranjang</button>
+                  <a href="products.php?add_to_cart='.$product_id.'"><button class="add-to-cart-button">Masukan Ke Keranjang</button></a>
               </div>
           </div>';
 

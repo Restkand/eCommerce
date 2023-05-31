@@ -299,7 +299,7 @@ function search_retail_product(){
     // Condition if Isset or Not
         if(isset($_GET['search_data_product'])){
         $search_data_value = $_GET['search_data'];
-        $select_query = "SELECT * FROM products where category_id = 5 AND product_keywords OR product_title LIKE '%$search_data_value%'";;
+        $select_query = "SELECT * FROM products where category_id = 5 AND product_keywords LIKE '%$search_data_value%' OR product_title LIKE '%$search_data_value%'";;
         $result_query = mysqli_query($con, $select_query);
         $num_of_rows=mysqli_num_rows($result_query);
         if($num_of_rows == 0){
@@ -336,8 +336,102 @@ function search_retail_product(){
       }
     }
 
+// PHP Function get IP Address
+function getIPAddress() {
+  // Check for shared internet/ISP IP
+  if (!empty($_SERVER['HTTP_CLIENT_IP']) && filter_var($_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP)) {
+      return $_SERVER['HTTP_CLIENT_IP'];
+  }
+  
+  // Check for a proxy IP
+  if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']) && filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
+      return $_SERVER['HTTP_X_FORWARDED_FOR'];
+  }
+  
+  // Check for a remote IP
+  if (!empty($_SERVER['REMOTE_ADDR']) && filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP)) {
+      return $_SERVER['REMOTE_ADDR'];
+  }
+  // Return the default IP
+  return 'Unknown';
+}
+// Usage example
+// $ipAddress = getIPAddress();
+// echo "Your IP address is: " . $ipAddress;
 
 
+// Function for the Cart
+function cart(){
+  if(isset($_GET['add_to_cart'])){
+    global $con;
+    $get_ip_add = getIPAddress();
+    $get_product_id= $_GET['add_to_cart'];
+    $select_query = "SELECT * FROM cart_details WHERE ip_address='$get_ip_add' AND product_id=$get_product_id";
+    $result_query = mysqli_query($con,$select_query);
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows > 0){
+      echo "<script>alert('Produk sudah ada di dalam keranjang')</script>";
+      echo "<script>window.open('products.php','_self')</script>";
+    }
+    else {
+      $insert_query="INSERT INTO cart_details (product_id, ip_address, quantity) VALUES ($get_product_id, '$get_ip_add', 1)";
+      $result_query = mysqli_query($con,$insert_query);
+      echo "<script>alert('Produk berhasil dimasukan ke dalam keranjang')</script>";
+      echo "<script>window.open('products.php','_self')</script>";
+    }
+  }
+}
+
+function cart_item()
+{
+  if(isset($_GET['add_to_cart']))
+  {
+    global $con;
+    $get_ip_add = getIPAddress();
+    $select_query = "SELECT * FROM cart_details WHERE ip_address = '$get_ip_add'";
+    $result_query = mysqli_query($con,$select_query);
+    $count_cart_items = mysqli_num_rows($result_query);
+  }
+  else{
+    global $con;
+    $get_ip_add = getIPAddress();
+    $select_query = "SELECT * FROM cart_details WHERE ip_address = '$get_ip_add'";
+    $result_query = mysqli_query($con,$select_query);
+    $count_cart_items = mysqli_num_rows($result_query);
+  }
+  if($count_cart_items > 0){
+  echo '              
+    <a href="cart.php" class="shop-icon cart-icon" >
+        <img src="assets/img/fluent-mdl2_shop.png" alt="shop logo">
+        <span class="badge">'.$count_cart_items.'</span>
+    </a>';
+  }
+  else {
+    echo '
+    <a href="cart.php" class="shop-icon cart-icon" >
+    <img src="assets/img/fluent-mdl2_shop.png" alt="shop logo">
+    </a>';
+  }
+}
+
+function total_cart_price() {
+  global $con;
+  $get_ip_add = getIPAddress();
+  $total_price = 0;
+  $cart_query="SELECT * FROM cart_details WHERE ip_address = '$get_ip_add'";
+  $result_query = mysqli_query($con, $cart_query);
+  while($row = mysqli_fetch_array($result_query)){
+    $product_id = $row['product_id'];
+    $select_products = "SELECT * FROM products WHERE product_id =$product_id";
+    $result_products = mysqli_query($con, $select_products);
+    while($row_product_price = mysqli_fetch_array($result_products)){
+      $product_price = array($row_product_price['product_price']);
+      $product_values = array_sum($product_price);
+      $total_price += $product_values;
+    }
+  }
+  echo $total_price;
+}
 
 ?>
 
