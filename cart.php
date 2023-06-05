@@ -47,6 +47,7 @@ include('functions/common_function.php');
     <!-- cart Function -->
     <?php 
     cart();
+    sub_CheckOut();
     ?>
 
     <hr>
@@ -84,6 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result_products_quantity = mysqli_query($con, $update_cart);
             }
             $updatedQuantities[$product_id] = $submittedQuantity;
+            
+
         }
     }
 }
@@ -115,7 +118,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result_products_quantity = mysqli_query($con, $update_cart);
             }
             $updatedQuantities[$product_id] = $submittedQuantity;
+            
+
         }
+
     }
 }
 
@@ -155,7 +161,7 @@ while ($row = mysqli_fetch_array($result_query)) {
                                     <div class="item-details">
                                         <h6 class="item-name"><?php echo $product_title ?> : Rp <?php echo $formatted_price ?></h6>
                                         <div class="item-quantity">
-                                            <input type="number" class="form-control quantity-input" name="qty[<?php echo $product_id ?>]" value="<?php echo $updatedQuantities[$product_id]; ?>">
+                                            <input type="number" class="form-control quantity-input" name="qty[<?php echo $product_id ?>]" value="<?php echo $updatedQuantities[$product_id]; ?>" min="1">
                                         </div>
                                         
                                         <p class="item-price">Total : Rp <?php echo number_format($product_values, 0, '.', '.'); ?></p>
@@ -177,7 +183,7 @@ while ($row = mysqli_fetch_array($result_query)) {
                                     <div class="col-7"><strong>Subtotal:</strong></div>
                                     <div class="col-5"><strong>RP <?php echo $formatted_total_price ?></strong></div>
                                 </div>
-                                <button class="btn btn-primary btn-checkout">Checkout</button>
+                                <a href="cart.php?sub_checkout" class="btn btn-primary btn-checkout">Checkout</a>
                             </div>
                         </div>
                     </div>
@@ -231,58 +237,7 @@ while ($row = mysqli_fetch_array($result_query)) {
         }
     }
 ?>
-<!-- Script Update quantities
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('.quantity-input').on('change', function() {
-      var inputElement = $(this); // Store the reference to $(this)
-
-      var productId = inputElement.data('product-id');
-      var prevQuantity = inputElement.data('prev-quantity') || 1; // Default to 1 if previous quantity is undefined
-      var quantity = inputElement.val();
-
-      // Check if the quantity is valid (greater than or equal to 1)
-      if (quantity < 1) {
-        quantity = 1; // Reset to 1 if the entered quantity is less than 1
-        inputElement.val(quantity); // Update the input value
-      }
-
-      // Check if the quantity is increased or decreased
-      var action = '';
-      if (quantity > prevQuantity) {
-        action = 'increase';
-      } else if (quantity < prevQuantity) {
-        action = 'decrease';
-      }
-
-      // Update the previous quantity data attribute
-      inputElement.data('prev-quantity', quantity);
-
-      // Send AJAX request to update the quantity
-      $.ajax({
-        url: 'functions/update_cart_quantities.php',
-        method: 'POST',
-        data: {
-          productId: productId,
-          quantity: quantity,
-          action: action
-        },
-        success: function(response) {
-          // Handle the response if needed
-          console.log(response);
-          // Update the total price in the item-details
-          var price = parseFloat(inputElement.closest('.cart-item').find('.item-price').text().replace('Rp ', ''));
-          var totalPrice = price * quantity;
-          inputElement.closest('.cart-item').find('.item-details .item-price').text('Rp ' + totalPrice.toFixed(2));
-        },
-        error: function(xhr, status, error) {
-          // Handle error if needed
-          console.log(error);
-        }
-      });
-    }); -->
-  });
 </script>
 </body>
 </html>
+ 

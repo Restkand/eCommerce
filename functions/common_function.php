@@ -433,5 +433,36 @@ function total_cart_price() {
   echo $total_price;
 }
 
+// function Cart Item
+function sub_CheckOut(){
+  if(isset($_GET['sub_checkout'])){
+    global $con;
+    $get_ip_add = getIPAddress();
+
+    // Insert into sub_checkout table
+    $insert_query="INSERT INTO sub_checkout (ip_address) VALUES ('$get_ip_add')";
+    $result_query = mysqli_query($con,$insert_query);
+    if ($result_query) { 
+      
+      $sub_orderId_query=" SELECT sub_order_id FROM sub_checkout WHERE ip_address = '$get_ip_add' ORDER BY date_sub_order DESC LIMIT 1";
+      $result_subOrderId = mysqli_query($con, $sub_orderId_query);
+
+      if ($result_subOrderId && mysqli_num_rows($result_subOrderId) > 0) {
+        $row = mysqli_fetch_assoc($result_subOrderId);
+        $sub_orderId = $row['sub_order_id'];
+        $sub_orderId_string = strval($sub_orderId);
+        
+        // Insert the sub_order_id into cart_details table
+        $update_sub_orderId = "UPDATE cart_details SET sub_order_id = '$sub_orderId_string' WHERE ip_address = '$get_ip_add'";
+        $result_update_sub_orderId = mysqli_query($con, $update_sub_orderId);
+      }
+    }
+    echo "<script>window.location.href = 'info_penerima.php';</script>";
+    exit;
+  }
+}
+
 ?>
+
+
 
