@@ -3,51 +3,6 @@ include('includes/connect.php');
 include('includes/footer.php');
 include('functions/common_function.php');
 require_once 'functions/ongkir_function.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  global $con;
-  if (isset($_GET['checkout_id'])){
-    $checkout_id = $_GET['checkout_id'];
-    // Query untuk gabungan tabel
-    $query = "SELECT cd.product_id, ip.order_id, cd.sub_order_id
-    FROM cart_details cd
-    INNER JOIN info_penerima ip ON cd.sub_order_id = ip.sub_order_id WHERE cd.sub_order_id = '$checkout_id'";
-    $result = mysqli_query($con, $query);
-
-    // Array untuk menyimpan baris yang telah dipisahkan
-    $separatedRows = array();
-    
-    while ($row = mysqli_fetch_assoc($result)) {
-      $product_id = $row['product_id'];
-      $sub_order_id = $row['sub_order_id'];
-      
-      // Periksa apakah sub_order_id sudah ada dalam array $separatedRows
-      if (isset($separatedRows[$sub_order_id][$product_id])) {
-          // Jika sudah ada, lanjutkan ke baris berikutnya
-          continue;
-      } else {
-          // Jika belum ada, tambahkan baris baru
-          $separatedRows[$sub_order_id][$product_id] = $row;
-      }
-    }
-    
-    foreach ($separatedRows as $sub_order_id => $products) {
-      foreach ($products as $product_id => $row) {
-        $order_id=$row['order_id'];
-        $sub_order_id = $row['sub_order_id'];
-        $date = date('dmY');
-        $invoice_number = 'INV-' . $date . $order_id;
-        $status_checkout = 'Pending Payment';
-        $insertQuery = "INSERT INTO checkout_details (product_id, order_id, sub_order_id, invoice_number, status_checkout) VALUES ('$product_id', '$order_id','$sub_order_id', '$invoice_number', '$status_checkout')";
-        mysqli_query($con, $insertQuery);
-      }
-    }
-    $checkout_id = urlencode($checkout_id);
-    header("Location: payment.php?checkout_id=$checkout_id");
-    exit;
-  }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -92,19 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
     <hr>
-    <h2 class="card-title text-center mb-3">Konfirmasi Pesanan</h2>
+    <h2 class="card-title text-center mb-3">Konfirmasi Pembayaran</h2>
     <div class="container">
       <div class="row">
         <div class="col-md-8"> 
-          <?php 
-          info_checkout();
-          ?>
         </div>
           <div class="col-md-4">
             <!-- Informasi barang yang ingin dibeli -->
-            <?php 
-            info_product_checkout();
-            ?>
           </div>
       </div>
     </div>

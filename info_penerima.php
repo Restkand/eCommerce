@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   JOIN products ON cart_details.product_id = products.product_id
                   WHERE cart_details.ip_address = '$get_ip_add'";
     $result_query = mysqli_query($con, $cart_query);
+    $product_sub_id = '';
     while ($row = mysqli_fetch_array($result_query)) {
       $product_sub_id = $row['sub_order_id'];
       $product_quantity = $row['quantity'];
@@ -50,16 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "INSERT INTO info_penerima (sub_order_id,ip_address,nama_penerima, email_penerima, telepon_penerima, id_kota_pengirim, id_kota_penerima, alamat_penerima, berat, ongkos_kirim,harga_product,total_harga) 
                 VALUES ('$product_sub_id','$get_ip_add','$nama_penerima', '$email_penerima', '$telepon_penerima', '$kota_pengirim', '$kota_penerima', '$alamat_penerima', '$weight', '$chosen_cost', '$total_price_product','$all_total_price')";
         $result = mysqli_query($con, $sql);
-
-        // if ($result) {
-        //     echo "Data ongkos kirim berhasil disimpan ke dalam tabel.";
-        // } else {
-        //     echo "Terjadi kesalahan saat menyimpan data ongkos kirim.";
-        // }
     } 
-    // else {
-    //     echo "Gagal mendapatkan data ongkos kirim dari API RajaOngkir.";
-    // }
+    $checkout_id = urlencode($product_sub_id);
+    header("Location: checkout.php?checkout_id=$checkout_id");
+    exit;
 }
 
 // Menampilkan data ongkos kirim yang tersimpan
@@ -216,11 +211,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
     </div>
   </div>
-
-     <!-- Footer -->
-    <?php 
-        footer()
-    ?>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

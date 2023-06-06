@@ -462,6 +462,96 @@ function sub_CheckOut(){
   }
 }
 
+function info_checkout(){
+  global $con;
+  if (isset($_GET['checkout_id'])){
+    $checkout_subid = $_GET['checkout_id'];
+    $select_query = "SELECT * FROM info_penerima where sub_order_id = $checkout_subid  ORDER BY order_id DESC LIMIT 1";
+    $result_query = mysqli_query($con, $select_query);
+    while($row = mysqli_fetch_array($result_query)){
+      $nama_penerima = $row['nama_penerima'];
+      $email_penerima = $row['email_penerima'];
+      $telepon_penerima = $row['telepon_penerima'];
+      $alamat_penerima = $row['alamat_penerima'];
+    }
+    echo '
+    <form id="form-konfirm-pesanan" method="POST">
+      <!-- Formulir informasi pengiriman -->     
+      <div class="card">
+        <div class="card-body">
+            <div class="mb-3">
+              <h6>Nama: </h6>
+              <p>'.$nama_penerima.'</p>
+            </div>
+            <div class="mb-3">
+              <h6>Email: </h6>
+              <p>'.$email_penerima.'</p>
+            </div>
+            <div class="mb-3">
+              <h6>Nomor Telepon: </h6>
+              <p>'.$telepon_penerima.'</p>
+            </div>
+            <div class="mb-3">
+              <h6>Alamat Penerima: </h6>
+              <p>'.$alamat_penerima.'</p>
+            </div>
+              <input type="submit" value="CheckOut" class="btn btn-primary" id="btn-checkout">
+        </div>
+      </div>
+    </form>
+    ';
+  }
+}
+
+function info_product_checkout(){
+  global $con;
+  if (isset($_GET['checkout_id'])){
+    $checkout_subid = $_GET['checkout_id'];
+    echo ' 
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Informasi Barang</h5> ';
+        $cart_query = "SELECT cart_details.*, products.product_price, products.product_title, products.product_image1 FROM cart_details
+                    JOIN products ON cart_details.product_id = products.product_id
+                    WHERE cart_details.sub_order_id = '$checkout_subid'";
+        $result_query = mysqli_query($con, $cart_query);
+        echo '<div class="cart-items">';
+            mysqli_data_seek($result_query, 0); // Reset the result pointer 
+            while ($row = mysqli_fetch_array($result_query)) {
+            $product_id = $row['product_id'];
+            $formatted_price = number_format($row['product_price'], 0, '.', '.');
+            $product_title = $row['product_title'];
+            $product_image1 = $row['product_image1'];
+            $product_quantity = $row['quantity'];
+            $product_values = $row['product_price'] * $product_quantity;
+            
+            echo '<!-- Item -->
+            <hr>
+            <div class="cart-item">
+                <img src="assets/img/product_images/'.$product_image1.'" alt="'.$product_title.'" class="item-image">
+                <div class="item-details">
+                    <h6 class="item-name">'.$product_title.' : Rp '.$formatted_price.'</h6>                         
+                    <p class="item-quantity">Total Item: '.$product_quantity.'</p>
+                    <p class="item-price">Price Product : Rp '.number_format($product_values, 0, '.', '.').'</p>
+                </div>
+            </div>';
+        } 
+        $select_query = "SELECT * FROM info_penerima where sub_order_id = $checkout_subid  ORDER BY order_id DESC LIMIT 1";
+        $result_query = mysqli_query($con, $select_query);
+        while($row = mysqli_fetch_array($result_query)){
+          $harga_product = $row['harga_product'];
+          $ongkos_kirim = $row['ongkos_kirim'];
+          $total_harga = $row['total_harga'];
+        }
+        echo '
+        <hr>
+        <p class="item-name">SubTotal : RP '.number_format($harga_product, 0, '.', '.').'</p>
+        <p class="item-name">Ongkos Kirim : RP '.number_format($ongkos_kirim, 0, '.', '.').' </p>
+        <p class="item-price">Total Price : RP '.number_format($total_harga, 0, '.', '.').'</p>
+        <!-- Add more items here -->
+      </div>';
+}
+}
 ?>
 
 
