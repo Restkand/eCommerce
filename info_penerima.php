@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="inputAlamat" class="form-label">Alamat Lengkap</label>
                     <input type="text" class="form-control" id="inputAlamat" name="inputAlamat" placeholder="Masukkan Alamat Penerima">
                   </div>
-                    <input type="submit" value="Pembayaran" class="btn btn-primary" id="btn-periksa-ongkir">
+                    <input type="submit" value="Bayar" class="btn btn-primary" id="btn-periksa-ongkir">
               </div>
             </div>
             </form>
@@ -203,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                           </div>
                       </div>
                   <?php } ?>
-                  <p class="item-price">Total Price : Rp RP <?php echo $formatted_total_price ?></p>
+                  <p class="item-price">Total Price : Rp <?php echo $formatted_total_price ?></p>
                   <!-- Add more items here -->
                 </div>
               </div>

@@ -454,7 +454,7 @@ function sub_CheckOut(){
         
         // Insert the sub_order_id into cart_details table
         $update_sub_orderId = "UPDATE cart_details SET sub_order_id = '$sub_orderId_string' WHERE ip_address = '$get_ip_add'";
-        $result_update_sub_orderId = mysqli_query($con, $update_sub_orderId);
+        mysqli_query($con, $update_sub_orderId);
       }
     }
     echo "<script>window.location.href = 'info_penerima.php';</script>";

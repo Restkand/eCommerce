@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_GET['checkout_id'])){
     $checkout_id = $_GET['checkout_id'];
     // Query untuk gabungan tabel
-    $query = "SELECT cd.product_id, ip.order_id, cd.sub_order_id
+    $query = "SELECT cd.product_id, ip.order_id, cd.sub_order_id, cd.quantity
     FROM cart_details cd
     INNER JOIN info_penerima ip ON cd.sub_order_id = ip.sub_order_id WHERE cd.sub_order_id = '$checkout_id'";
     $result = mysqli_query($con, $query);
@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     while ($row = mysqli_fetch_assoc($result)) {
       $product_id = $row['product_id'];
       $sub_order_id = $row['sub_order_id'];
+      $quantity = $row['quantity'];
       
       // Periksa apakah sub_order_id sudah ada dalam array $separatedRows
       if (isset($separatedRows[$sub_order_id][$product_id])) {
@@ -37,11 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sub_order_id = $row['sub_order_id'];
         $date = date('dmY');
         $invoice_number = 'INV-' . $date . $order_id;
-        $status_checkout = 'Pending Payment';
-        $insertQuery = "INSERT INTO checkout_details (product_id, order_id, sub_order_id, invoice_number, status_checkout) VALUES ('$product_id', '$order_id','$sub_order_id', '$invoice_number', '$status_checkout')";
+        $status_checkout = 'Menunggu Pembayaran';
+        $insertQuery = "INSERT INTO checkout_details (product_id, order_id, sub_order_id, quantity, invoice_number, status_checkout) VALUES ('$product_id', '$order_id','$sub_order_id','$quantity', '$invoice_number', '$status_checkout')";
         mysqli_query($con, $insertQuery);
       }
     }
+
+    $delete_cart = "DELETE FROM cart_details WHERE sub_order_id = $checkout_id";
+    mysqli_query($con, $delete_cart);
     $checkout_id = urlencode($checkout_id);
     header("Location: payment.php?checkout_id=$checkout_id");
     exit;

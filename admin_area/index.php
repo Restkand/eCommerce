@@ -28,7 +28,7 @@
                             Products
                         </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="insert_product.php">Insert Products</a></li>
+                        <li><a class="dropdown-item" href="index.php?insert_product">Insert Products</a></li>
                         <li><a class="dropdown-item" href="#">View Products</a></li>
                     </ul>
                     </li>
@@ -89,6 +89,9 @@
         }
         if(isset($_GET['insert_brand'])){
             include('insert_brands.php');
+        }
+        if(isset($_GET['insert_product'])){
+            include('insert_product.php');
         }
         ?>
     </div>

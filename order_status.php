@@ -3,6 +3,46 @@ include('includes/connect.php');
 include('includes/footer.php');
 include('functions/common_function.php');
 require_once 'functions/ongkir_function.php';
+
+if (isset($_GET['checkout_id'])){
+  $checkout_subid = $_GET['checkout_id'];
+
+  // Menampilkan Info Penerima 
+  $select_query = "SELECT * FROM info_penerima where sub_order_id = $checkout_subid  ORDER BY order_id DESC LIMIT 1";
+  $result_query = mysqli_query($con, $select_query);
+  while($row = mysqli_fetch_array($result_query)){
+    $nama_penerima = $row['nama_penerima'];
+    $telepon_penerima = $row['telepon_penerima'];
+    $alamat_penerima = $row['alamat_penerima'];
+    $ongkir = $row['ongkos_kirim'];
+    $subtotal = $row['harga_product'];
+    $subtotal_format = number_format($subtotal, 0, '.', '.'); 
+    $ongkir = $row['ongkos_kirim'];
+    $ongkir_format = number_format($ongkir, 0, '.', '.');
+    $total_harga = $row['total_harga'];
+    $total_harga_format = number_format($total_harga, 0, '.', '.');
+  }
+  
+  // Menampilkan Checkout_details
+  $select_query_inv = "SELECT * FROM checkout_details where sub_order_id = $checkout_subid  ORDER BY order_id DESC LIMIT 1";
+  $result_query_inv = mysqli_query($con, $select_query_inv);
+  while($row_inv = mysqli_fetch_array($result_query_inv)){
+      $invoice_number = $row_inv['invoice_number'];
+      $status_checkout = $row_inv['status_checkout'];
+  }
+
+  // Menampilkan Product
+  $product_query = "SELECT checkout_details.*, products.product_price, products.product_title, products.product_image1 FROM checkout_details
+  JOIN products ON checkout_details.product_id = products.product_id
+  WHERE checkout_details.sub_order_id = '$checkout_subid'";
+  $result_product_query = mysqli_query($con, $product_query);
+
+  if(isset($_POST['confirm_payment'])){
+    $checkout_subid = urlencode($checkout_subid);
+    header("Location: payment.php?checkout_id=$checkout_subid");
+    exit;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,70 +51,11 @@ require_once 'functions/ongkir_function.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=`, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/CSS/order_status.css">
     <link rel="stylesheet" href="assets/CSS/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <title>Produk | LOGO</title>
-    <style>
-    .order_contain {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .order-details {
-      background-color: #fff;
-      padding: 30px;
-      border: 1px solid #e2e2e2;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .order-details h2 {
-      margin-bottom: 20px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-    }
-    .customer-info h3, .product-info h3, .total-info h3, .order-status h3 {
-      margin-top: 30px;
-      margin-bottom: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #333;
-    }
-    .customer-info p {
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #555;
-    }
-    .product-table th, .product-table td {
-      padding: 12px;
-      vertical-align: middle;
-      font-size: 14px;
-      color: #555;
-    }
-    .product-table th {
-      background-color: #f8f9fa;
-      font-weight: bold;
-    }
-    .invoice-number {
-      font-size: 20px;
-      font-weight: bold;
-      color: #333;
-    }
-    .total-amount {
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-    }
-    .btn-primary {
-      background-color: #007bff;
-      border-color: #007bff;
-    }
-    .btn-primary:hover {
-      background-color: #0069d9;
-      border-color: #0062cc;
-    }
-    </style>
 </head>
 <body>
 
@@ -107,44 +88,67 @@ require_once 'functions/ongkir_function.php';
     <h2 class="card-title text-center mb-3">Status Pesanan</h2>
     <div class="container order_contain">
         <div class="order-details">
-        <h2>Invoice: <span class="invoice-number">INV-210517-12345</span></h2>
+        <h2>Invoice: <span class="invoice-number"><?php echo "$invoice_number"?></span></h2>
         <div class="customer-info">
             <h3>Informasi Penerima</h3>
-            <p><strong>Nama:</strong> John Doe</p>
-            <p><strong>Telepon:</strong> 081234567890</p>
-            <p><strong>Alamat:</strong> Jl. Contoh Alamat No. 123</p>
+            <p><strong>Nama:</strong> <?php echo "$nama_penerima"?></p>
+            <p><strong>Telepon:</strong> <?php echo "$telepon_penerima"?></p>
+            <p><strong>Alamat:</strong> <?php echo "$alamat_penerima"?></p>
         </div>
         <div class="product-info">
             <h3>Produk yang Dibeli</h3>
-            <table class="table product-table">
-            <thead>
-                <tr>
-                <th>Nama Produk</th>
-                <th>Harga</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>Product A</td>
-                <td>Rp 100.000</td>
-                </tr>
-                <tr>
-                <td>Product B</td>
-                <td>Rp 200.000</td>
-                </tr>
-            </tbody>
-            </table>
+            <?php while ($row = mysqli_fetch_array($result_product_query)) {
+              $product_id = $row['product_id'];
+              $formatted_price = number_format($row['product_price'], 0, '.', '.');
+              $product_title = $row['product_title'];
+              $product_image1 = $row['product_image1'];
+              $product_quantity = $row['quantity'];
+              $product_values = $row['product_price'] * $product_quantity;
+              ?>
+              <!-- Item -->
+              
+              <div class="cart-item">
+                  <img src="assets/img/product_images/<?php echo $product_image1 ?>" alt="<?php echo $product_title ?>" class="item-image">
+                  <div class="item-details">
+                      <h6 class="item-name"><?php echo $product_title ?> : Rp <?php echo $formatted_price ?></h6>                         
+                      <p class="item-quantity">Total Item: <?php echo $product_quantity; ?></p>
+                      <p class="item-price">Price Product : Rp <?php echo number_format($product_values, 0, '.', '.'); ?></p>
+                  </div>
+              </div>
+              <hr>
+              <?php } ?>
         </div>
         <div class="total-info">
-            <h3>Total Pembayaran</h3>
-            <p class="total-amount">Rp 300.000</p>
-        </div>
+          <p class="item-name"><strong>SubTotal</strong> : Rp <?php echo "$subtotal_format"?></p>
+          <p class="item-name"><strong>Ongkos Kirim</strong> : Rp <?php echo "$ongkir_format"?> </p>
+          <h3>Total Pembayaran</h3>
+          <p class="total-amount">Rp <?php echo "$total_harga_format"?></p>
+       </div>
         <div class="order-status">
-            <h3>Status Pesanan : Not Payment</h3>
+            <h3>Status Pesanan : <?php echo "$status_checkout"?></h3>
         </div>
+        <?php if($status_checkout == "Menunggu Pembayaran") {?>
+        <form action="" method="POST" enctype="multipart/form-data">
+          <div class="text-center">
+            <button class="btn btn-primary" type="submit" name="confirm_payment" id="confirm_payment">Konfirmasi Pembayaran</button>
+          </div>
+        </form>
+        <?php } ?>
+        <?php if($status_checkout == "Sedang di Packing") {?>
         <div class="text-center">
-            <button class="btn btn-primary">Lacak Pesanan</button>
+            <!-- <h3>Mohon Menunggu</h3> -->
         </div>
+        <?php } ?>
+        <?php if($status_checkout == "Sedang di Kirim") {?>
+        <div class="text-center">
+         <button class="btn btn-primary">Lacak Pesanan</button>
+        </div>
+        <?php } ?>
+        <?php if($status_checkout == "Pesanan di Terima") {?>
+        <div class="text-center">
+            <!-- <h3>Pesanan Di Terima</h3> -->
+        </div>
+        <?php } ?>
         </div>
   </div>
 

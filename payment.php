@@ -29,6 +29,9 @@ if (isset($_GET['checkout_id'])){
         $insert_bukti = "INSERT INTO bukti_pembayaran(sub_order_id,invoice_number,bukti_image) 
                          VALUES ('$checkout_subid','$invoice_number','$bukti_image')";
         $result_query = mysqli_query($con,$insert_bukti);
+        
+        $update_status = "UPDATE checkout_details  SET status_checkout = 'Sedang di Packing' WHERE sub_order_id = '$checkout_subid'";
+        mysqli_query($con,$update_status);
 
         $checkout_subid = urlencode($checkout_subid);
         header("Location: order_status.php?checkout_id=$checkout_subid");
