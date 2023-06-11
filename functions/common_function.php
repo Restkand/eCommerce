@@ -50,7 +50,7 @@ function get_product_retail(){
     // Condition if Isset or Not
     if(!isset($_GET['brand'])){
       if(!isset($_GET['gender'])){
-        $select_query = "SELECT * FROM products where category_id = 5";;
+        $select_query = "SELECT * FROM products where category_id = 1";;
         $result_query = mysqli_query($con, $select_query);
         // $row = mysqli_fetch_assoc($result_query);
         // echo $row['product_title'];
@@ -128,7 +128,7 @@ function get_uniqe_retail_brands(){
     $brand_id = $_GET['brand'];
 
     global $con;
-    $select_query = "SELECT * FROM products where category_id = 5 AND brand_id = $brand_id";
+    $select_query = "SELECT * FROM products where category_id = 1 AND brand_id = $brand_id";
     $result_query = mysqli_query($con, $select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows == 0){
@@ -171,7 +171,7 @@ function get_uniqe_retail_genders(){
     $gender_id = $_GET['gender'];
 
     global $con;
-    $select_query = "SELECT * FROM products where category_id = 5 AND gender_id = $gender_id";
+    $select_query = "SELECT * FROM products where category_id = 1 AND gender_id = $gender_id";
     $result_query = mysqli_query($con, $select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows == 0){
@@ -299,7 +299,7 @@ function search_retail_product(){
     // Condition if Isset or Not
         if(isset($_GET['search_data_product'])){
         $search_data_value = $_GET['search_data'];
-        $select_query = "SELECT * FROM products where category_id = 5 AND product_keywords LIKE '%$search_data_value%' OR product_title LIKE '%$search_data_value%'";;
+        $select_query = "SELECT * FROM products where category_id = 1 AND product_keywords LIKE '%$search_data_value%' OR product_title LIKE '%$search_data_value%'";;
         $result_query = mysqli_query($con, $select_query);
         $num_of_rows=mysqli_num_rows($result_query);
         if($num_of_rows == 0){

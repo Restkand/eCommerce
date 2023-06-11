@@ -1,0 +1,95 @@
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.payment-row {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.payment-row h4 {
+  color: #28395a;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.payment-row ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+.payment-row ul li {
+  color: #6c757d;
+}
+
+.upload-row {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.upload-row h4 {
+  color: #28395a;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.upload-row .form-group label {
+  color: #6c757d;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.upload-row .btn {
+  margin-top: 20px;
+  background-color: #5e72e4;
+  border-color: #5e72e4;
+}
+.upload-row .btn:hover {
+  background-color: #4e61d4;
+  border-color: #4e61d4;
+}
+
+.custom-file-upload {
+  position: relative;
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f5f5f5;
+  color: #6c757d;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.custom-file-upload:hover {
+  background-color: #e9ecef;
+}
+
+.custom-file-upload input[type=file] {
+  position: absolute;
+  font-size: 100px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.custom-file-upload input[type=file] + label::before {
+  content: "Pilih File";
+}
+
+.custom-file-upload input[type=file]:focus + label::before {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.custom-file-upload input[type=file]:valid + label::before {
+  content: attr(data-file-name);
+  background-color: #28a745;
+  color: #fff;
+}/*# sourceMappingURL=payment.css.map */
