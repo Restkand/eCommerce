@@ -5,85 +5,87 @@ include('./includes/connect.php');
 
 // getting products 
 function get_products(){
-        global $con;
+  global $con;
 
-        // Condition if Isset or Not
-        if(!isset($_GET['category'])){
-          if(!isset($_GET['gender'])){
-            $select_query = "SELECT * FROM products ORDER BY product_id DESC LIMIT 6";
-            $result_query = mysqli_query($con, $select_query);
-            // $row = mysqli_fetch_assoc($result_query);
-            // echo $row['product_title'];
-            while($row = mysqli_fetch_assoc($result_query)){
-              $product_id = $row['product_id'];
-              $product_title = $row['product_title'];
-              $product_desc = $row['product_desc'];
-              $product_image1 = $row['product_image1'];
-              $product_price = $row['product_price'];
-              $formatted_price = number_format($product_price, 0, ',','.');
-              $category_id = $row['category_id'];
-              $gender_id = $row['gender_id'];
-              echo 
-              "
-                  <div class='col-md-3'>
-                    <div class='cardbox-group'>
-                      <div class='card border-0' style='width: 18rem;'>
-                      <a href='product_details.php?product_id=$product_id'>
-                        <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
-                        <div class='card-body'>
-                          <h5 class='card-title'>$product_title</h5>
-                          <p>$formatted_price</p>
-                        </div>
-                      </a>
-                      </div>
-                    </div>
-                  </div>  
-              ";
-            }
-          }
-        }
+  // Condition if Isset or Not
+  if(!isset($_GET['category'])){
+    if(!isset($_GET['gender'])){
+      $select_query = "SELECT * FROM products ORDER BY product_id DESC LIMIT 6";
+      $result_query = mysqli_query($con, $select_query);
+      // $row = mysqli_fetch_assoc($result_query);
+      // echo $row['product_title'];
+      while($row = mysqli_fetch_assoc($result_query)){
+        $product_id = $row['product_id'];
+        $product_title = $row['product_title'];
+        $product_desc = $row['product_desc'];
+        $product_image1 = $row['product_image1'];
+        $product_price = $row['product_price'];
+        $formatted_price = number_format($product_price, 0, ',','.');
+        $category_id = $row['category_id'];
+        $gender_id = $row['gender_id'];
+        echo 
+        "
+            <div class='col-md-3'>
+              <div class='cardbox-group'>
+                <div class='card border-0' style='width: 18rem;'>
+                <a href='product_details.php?product_id=$product_id'>
+                  <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
+                  <div class='card-body'>
+                    <h5 class='card-title'>$product_title</h5>
+                    <p>$formatted_price</p>
+                  </div>
+                </a>
+                </div>
+              </div>
+            </div>  
+        ";
+      }
     }
+  }
+}
 
 function get_product_retail(){
   global $con;
 
     // Condition if Isset or Not
-    if(!isset($_GET['brand'])){
-      if(!isset($_GET['gender'])){
-        $select_query = "SELECT * FROM products where category_id = 1";;
-        $result_query = mysqli_query($con, $select_query);
-        // $row = mysqli_fetch_assoc($result_query);
-        // echo $row['product_title'];
-        while($row = mysqli_fetch_assoc($result_query)){
-          $product_id = $row['product_id'];
-          $product_title = $row['product_title'];
-          $product_desc = $row['product_desc'];
-          $product_image1 = $row['product_image1'];
-          $product_price = $row['product_price'];
-          $formatted_price = number_format($product_price, 0, ',','.');
-          $brand_id = $row['brand_id'];
-          $gender_id = $row['gender_id'];
-          echo 
-          "
-              <div class='col-md-3'>
-                <div class='cardbox-group'>
-                  <div class='card border-0' style='width: 18rem;'>
-                  <a href='product_details.php?product_id=$product_id'>
-                    <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
-                    <div class='card-body'>
-                      <h5 class='card-title'>$product_title</h5>
-                      <p>$formatted_price</p>
+    if(!isset($_GET['category'])){
+      if(!isset($_GET['brand'])){
+        if(!isset($_GET['gender'])){
+          // $select_query = "SELECT * FROM products where category_id = 1";
+          $select_query = "SELECT * FROM products";
+          $result_query = mysqli_query($con, $select_query);
+          // $row = mysqli_fetch_assoc($result_query);
+          // echo $row['product_title'];
+          while($row = mysqli_fetch_assoc($result_query)){
+            $product_id = $row['product_id'];
+            $product_title = $row['product_title'];
+            $product_desc = $row['product_desc'];
+            $product_image1 = $row['product_image1'];
+            $product_price = $row['product_price'];
+            $formatted_price = number_format($product_price, 0, ',','.');
+            $brand_id = $row['brand_id'];
+            $gender_id = $row['gender_id'];
+            echo 
+            "
+                <div class='col-md-3'>
+                  <div class='cardbox-group'>
+                    <div class='card border-0' style='width: 18rem;'>
+                    <a href='product_details.php?product_id=$product_id'>
+                      <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
+                      <div class='card-body'>
+                        <h5 class='card-title'>$product_title</h5>
+                        <p>$formatted_price</p>
+                      </div>
+                    </a>
                     </div>
-                  </a>
                   </div>
-                </div>
-              </div>  
-          ";
+                </div>  
+            ";
+          }
         }
       }
-    }
+  }
 }
-
 
 function get_uniqe_categories(){
   if(isset($_GET['category'])){
@@ -128,7 +130,8 @@ function get_uniqe_retail_brands(){
     $brand_id = $_GET['brand'];
 
     global $con;
-    $select_query = "SELECT * FROM products where category_id = 1 AND brand_id = $brand_id";
+    // $select_query = "SELECT * FROM products where category_id = 1 AND brand_id = $brand_id";
+    $select_query = "SELECT * FROM products where brand_id = $brand_id";
     $result_query = mysqli_query($con, $select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows == 0){
@@ -171,7 +174,8 @@ function get_uniqe_retail_genders(){
     $gender_id = $_GET['gender'];
 
     global $con;
-    $select_query = "SELECT * FROM products where category_id = 1 AND gender_id = $gender_id";
+    // $select_query = "SELECT * FROM products where category_id = 1 AND gender_id = $gender_id";
+    $select_query = "SELECT * FROM products where gender_id = $gender_id";
     $result_query = mysqli_query($con, $select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows == 0){
@@ -186,6 +190,50 @@ function get_uniqe_retail_genders(){
       $product_image1 = $row['product_image1'];
       $product_price = $row['product_price'];
       $formatted_price = number_format($product_price, 0, ',','.');
+      $brand_id = $row['brand_id'];
+      $gender_id = $row['gender_id'];
+      echo 
+      "
+          <div class='col-md-3'>
+            <div class='cardbox-group'>
+              <div class='card border-0' style='width: 18rem;'>
+              <a href='product_details.php?product_id=$product_id'>
+                <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
+                <div class='card-body'>
+                  <h5 class='card-title'>$product_title</h5>
+                  <p>$formatted_price</p>
+                </div>
+              </a>
+              </div>
+            </div>
+          </div>  
+      ";
+    }
+  }
+}
+
+function get_uniqe_retail_category(){
+  if(isset($_GET['category'])){
+    $category_id = $_GET['category'];
+
+    global $con;
+    // $select_query = "SELECT * FROM products where category_id = 1 AND gender_id = $gender_id";
+    $select_query = "SELECT * FROM products where category_id = $category_id";
+    $result_query = mysqli_query($con, $select_query);
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows == 0){
+      echo "<h2 class='text-center mt-3'>No Stock For This Category</h2>";
+    }
+    // $row = mysqli_fetch_assoc($result_query);
+    // echo $row['product_title'];
+    while($row = mysqli_fetch_assoc($result_query)){
+      $product_id = $row['product_id'];
+      $product_title = $row['product_title'];
+      $product_desc = $row['product_desc'];
+      $product_image1 = $row['product_image1'];
+      $product_price = $row['product_price'];
+      $formatted_price = number_format($product_price, 0, ',','.');
+      $category_id = $row['category_id'];
       $brand_id = $row['brand_id'];
       $gender_id = $row['gender_id'];
       echo 
@@ -296,45 +344,64 @@ function select_brands(){
 function search_retail_product(){
   global $con;
 
-    // Condition if Isset or Not
-        if(isset($_GET['search_data_product'])){
-        $search_data_value = $_GET['search_data'];
-        $select_query = "SELECT * FROM products where category_id = 1 AND product_keywords LIKE '%$search_data_value%' OR product_title LIKE '%$search_data_value%'";;
-        $result_query = mysqli_query($con, $select_query);
-        $num_of_rows=mysqli_num_rows($result_query);
-        if($num_of_rows == 0){
-          echo "<h2 class='text-center mt-3'>No Results Match</h2>";
-        }
-        // $row = mysqli_fetch_assoc($result_query);
-        // echo $row['product_title'];
-        while($row = mysqli_fetch_assoc($result_query)){
-          $product_id = $row['product_id'];
-          $product_title = $row['product_title'];
-          $product_desc = $row['product_desc'];
-          $product_image1 = $row['product_image1'];
-          $product_price = $row['product_price'];
-          $formatted_price = number_format($product_price, 0, ',','.');
-          $brand_id = $row['brand_id'];
-          $gender_id = $row['gender_id'];
-          echo 
-          "
-              <div class='col-md-3'>
-                <div class='cardbox-group'>
-                  <div class='card border-0' style='width: 18rem;'>
-                  <a href='product_details.php?product_id=$product_id'>
-                    <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
-                    <div class='card-body'>
-                      <h5 class='card-title'>$product_title</h5>
-                      <p>$formatted_price</p>
-                    </div>
-                  </a>
-                  </div>
-                </div>
-              </div>  
-          ";
-        }
-      }
+  // Condition if Isset or Not
+    if(isset($_GET['search_data_product'])){
+    $search_data_value = $_GET['search_data'];
+    // $select_query = "SELECT * FROM products where category_id = 1 AND product_keywords LIKE '%$search_data_value%' OR product_title LIKE '%$search_data_value%'";
+    $select_query = "SELECT * FROM products where product_keywords LIKE '%$search_data_value%' OR product_title LIKE '%$search_data_value%'";
+    $result_query = mysqli_query($con, $select_query);
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows == 0){
+      echo "<h2 class='text-center mt-3'>No Results Match</h2>";
     }
+    // $row = mysqli_fetch_assoc($result_query);
+    // echo $row['product_title'];
+    while($row = mysqli_fetch_assoc($result_query)){
+      $product_id = $row['product_id'];
+      $product_title = $row['product_title'];
+      $product_desc = $row['product_desc'];
+      $product_image1 = $row['product_image1'];
+      $product_price = $row['product_price'];
+      $formatted_price = number_format($product_price, 0, ',','.');
+      $brand_id = $row['brand_id'];
+      $gender_id = $row['gender_id'];
+      echo 
+      "
+          <div class='col-md-3'>
+            <div class='cardbox-group'>
+              <div class='card border-0' style='width: 18rem;'>
+              <a href='product_details.php?product_id=$product_id'>
+                <img src='assets/img/product_images/$product_image1' class='card-img-top' alt='...'>
+                <div class='card-body'>
+                  <h5 class='card-title'>$product_title</h5>
+                  <p>$formatted_price</p>
+                </div>
+              </a>
+              </div>
+            </div>
+          </div>  
+      ";
+    }
+  }
+}
+
+function search_invoice_order(){
+  global $con;
+
+  // Condition if Isset or Not
+    if(isset($_GET['search_data_order'])){
+    $search_data_value = $_GET['search_order'];
+    $select_query = "SELECT * FROM checkout_details where invoice_number LIKE '%$search_data_value%'";
+    $result_query = mysqli_query($con, $select_query);
+    while($row = mysqli_fetch_array($result_query)){
+      $sub_orderid = $row['sub_order_id'];
+  }
+    $checkout_subid = urlencode($sub_orderid);
+    header("Location: order_status.php?checkout_id=$checkout_subid");
+    exit;
+
+  }
+}
 
 // PHP Function get IP Address
 function getIPAddress() {
@@ -382,8 +449,7 @@ function cart(){
   }
 }
 
-function cart_item()
-{
+function cart_item(){
   if(isset($_GET['add_to_cart']))
   {
     global $con;
@@ -550,7 +616,7 @@ function info_product_checkout(){
         <p class="item-price">Total Price : RP '.number_format($total_harga, 0, '.', '.').'</p>
         <!-- Add more items here -->
       </div>';
-}
+  }
 }
 ?>
 

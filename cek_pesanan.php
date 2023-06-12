@@ -14,7 +14,32 @@ include('functions/common_function.php');
     <link rel="stylesheet" href="assets/CSS/menuBelanja.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <title>Produk | LOGO</title>
+    <title>Cek Pesanan | LOGO</title>
+    <style>
+    .container-searcher {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      height: 80%;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      width: 100%;
+    }
+
+    #searchResults {
+      margin-top: 30px;
+    }
+    </style>
 </head>
 <body>
 
@@ -34,7 +59,7 @@ include('functions/common_function.php');
           </div>
           <div class="row">
               <div class="col nav-item text-center">
-                  <a href="products.php" class="activeNav">PRODUK</a>
+                  <a href="products.php">PRODUK</a>
                   <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
                   <a href="#">TENTANG KAMI</a>
               </div>
@@ -42,57 +67,27 @@ include('functions/common_function.php');
       </div>
   </div>
 
+    <!-- cart Function -->
+    <?php 
+    cart();
+    ?>
+
   <hr>
 
-  <!-- All content inside in the middle -->
-  <div class="content">
-    <div class="container">
-        <!-- Title Produk -->
-      <div class="row">
-        <div class="col-12 text-center">
-          <h3>Produk</h3>
-        </div>
+  <div class="container container-searcher">
+    <h1>Pencarian Pesanan</h1>
+    <form action="" method="get">
+      <div class="form-group">
+        <label for="invoiceNumber">Invoice Number:</label>
+        <input type="text" id="search_order" class="form-control" placeholder="INV-123456789" name="search_order" required>
       </div>
-      
-      <!-- Sort for Produk -->
-      <div class="row">
-        <hr>
-        <div class="col-sm-4 mb-4">
-          <!-- <label for="option1">Kategori : </label> -->
-          <?php
-            select_brands();
-          ?>
-        </div>
-        <div class="col-sm-4 mb-4">
-          <!-- <label for="option2">Brand :</label> -->
-            <?php
-              select_gender();
-            ?>
-          </select>
-        </div>
-        <div class="col-sm-4 mb-4">
-          <!-- <label for="option3">Label 3:</label> -->
-          <div class="input-group">
-            <form class="d-flex" action="" method="get">
-            <input type="text" id="option3" class="form-control" placeholder="Search" name="search_data">
-            <button class="btn btn-outline-secondary" type="submit" value="Search" name="search_data_product">
-              <i class="fas fa-search"></i>
-            </button>
-            </form>
-          </div>
-        </div>
-        <hr>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" value="Search" name="search_data_order">Cari Pesanan</button>
       </div>
-
-        <!-- Cardbox Group 1 -->
-      <div class="row justify-content-center card-row">
-      <!-- Fetching Products -->
-      <?php 
-        search_retail_product();
-        get_uniqe_retail_brands();
-        get_uniqe_retail_genders();
-      ?>
-
+    </form>
+    <?php 
+      search_invoice_order();
+    ?>
   </div>
   
     <!-- Footer -->

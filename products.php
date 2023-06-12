@@ -35,8 +35,7 @@ include('functions/common_function.php');
           <div class="row">
               <div class="col nav-item text-center">
                   <a href="products.php" class="activeNav">PRODUK</a>
-                  <a href="#">PRELOVED</a>
-                  <a  href="#">CARI LOKASI TOKO</a>
+                  <a  href="cek_pesanan.php">CEK PESANAN</a>
                   <a href="#">TENTANG KAMI</a>
               </div>
           </div>
@@ -66,13 +65,13 @@ include('functions/common_function.php');
         <div class="col-sm-4 mb-4">
           <!-- <label for="option1">Kategori : </label> -->
           <?php
-            select_brands();
+            select_category();
           ?>
         </div>
         <div class="col-sm-4 mb-4">
           <!-- <label for="option2">Brand :</label> -->
             <?php
-              select_gender();
+              select_brands();
             ?>
           </select>
         </div>
@@ -95,8 +94,8 @@ include('functions/common_function.php');
         <!-- Fetching Products -->
         <?php 
           get_product_retail();
+          get_uniqe_retail_category();
           get_uniqe_retail_brands();
-          get_uniqe_retail_genders();
         ?>
       </div>
   

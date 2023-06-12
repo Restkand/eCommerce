@@ -76,8 +76,7 @@ if (isset($_GET['checkout_id'])){
           <div class="row">
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
-                  <a href="#">PRELOVED</a>
-                  <a  href="#">CARI LOKASI TOKO</a>
+                  <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
                   <a href="#">TENTANG KAMI</a>
               </div>
           </div>
