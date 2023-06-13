@@ -1,48 +1,46 @@
 <?php
-include('includes/connect.php');
-include('includes/footer.php');
-include('functions/common_function.php');
-require_once 'functions/ongkir_function.php';
+    include('../includes/connect.php');
 
-if (isset($_GET['checkout_id'])){
-  $checkout_subid = $_GET['checkout_id'];
+    if (isset($_GET['detail_checkout'])){
+        global $con;
 
-  // Menampilkan Info Penerima 
-  $select_query = "SELECT * FROM info_penerima where sub_order_id = $checkout_subid  ORDER BY order_id DESC LIMIT 1";
-  $result_query = mysqli_query($con, $select_query);
-  while($row = mysqli_fetch_array($result_query)){
-    $nama_penerima = $row['nama_penerima'];
-    $telepon_penerima = $row['telepon_penerima'];
-    $alamat_penerima = $row['alamat_penerima'];
-    $ongkir = $row['ongkos_kirim'];
-    $subtotal = $row['harga_product'];
-    $subtotal_format = number_format($subtotal, 0, '.', '.'); 
-    $ongkir = $row['ongkos_kirim'];
-    $ongkir_format = number_format($ongkir, 0, '.', '.');
-    $total_harga = $row['total_harga'];
-    $total_harga_format = number_format($total_harga, 0, '.', '.');
-  }
-  
-  // Menampilkan Checkout_details
-  $select_query_inv = "SELECT * FROM checkout_details where sub_order_id = $checkout_subid  ORDER BY order_id DESC LIMIT 1";
-  $result_query_inv = mysqli_query($con, $select_query_inv);
-  while($row_inv = mysqli_fetch_array($result_query_inv)){
-      $invoice_number = $row_inv['invoice_number'];
-      $status_checkout = $row_inv['status_checkout'];
-  }
+        $checkout_subid = $_GET['detail_checkout'];
+        // Menampilkan Info Penerima 
+        $select_query = "SELECT * FROM info_penerima where sub_order_id = $checkout_subid  ORDER BY order_id DESC LIMIT 1";
+        $result_query = mysqli_query($con, $select_query);
+        while($row = mysqli_fetch_array($result_query)){
+            $nama_penerima = $row['nama_penerima'];
+            $telepon_penerima = $row['telepon_penerima'];
+            $alamat_penerima = $row['alamat_penerima'];
+            $ongkir = $row['ongkos_kirim'];
+            $subtotal = $row['harga_product'];
+            $subtotal_format = number_format($subtotal, 0, '.', '.'); 
+            $ongkir = $row['ongkos_kirim'];
+            $ongkir_format = number_format($ongkir, 0, '.', '.');
+            $total_harga = $row['total_harga'];
+            $total_harga_format = number_format($total_harga, 0, '.', '.');
+        }
+        
+        // Menampilkan Checkout_details
+        $select_query_inv = "SELECT * FROM checkout_details where sub_order_id = $checkout_subid  ORDER BY order_id DESC LIMIT 1";
+        $result_query_inv = mysqli_query($con, $select_query_inv);
+        while($row_inv = mysqli_fetch_array($result_query_inv)){
+            $invoice_number = $row_inv['invoice_number'];
+            $status_checkout = $row_inv['status_checkout'];
+        }
 
-  // Menampilkan Product
-  $product_query = "SELECT checkout_details.*, products.product_price, products.product_title, products.product_image1 FROM checkout_details
-  JOIN products ON checkout_details.product_id = products.product_id
-  WHERE checkout_details.sub_order_id = '$checkout_subid'";
-  $result_product_query = mysqli_query($con, $product_query);
+        // Menampilkan Product
+        $product_query = "SELECT checkout_details.*, products.product_price, products.product_title, products.product_image1 FROM checkout_details
+        JOIN products ON checkout_details.product_id = products.product_id
+        WHERE checkout_details.sub_order_id = '$checkout_subid'";
+        $result_product_query = mysqli_query($con, $product_query);
 
-  if(isset($_POST['confirm_payment'])){
-    $checkout_subid = urlencode($checkout_subid);
-    header("Location: payment.php?checkout_id=$checkout_subid");
-    exit;
-  }
-}
+        if(isset($_POST['confirm_payment'])){
+            $checkout_subid = urlencode($checkout_subid);
+            header("Location: payment.php?checkout_id=$checkout_subid");
+            exit;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -51,41 +49,26 @@ if (isset($_GET['checkout_id'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=`, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/CSS/order_status.css">
-    <link rel="stylesheet" href="assets/CSS/main.css">
+    <link rel="stylesheet" href="../assets/CSS/order_status.css">
+    <link rel="stylesheet" href="../assets/CSS/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <title>Produk | LOGO</title>
+    <style>
+    .container-outside {
+            max-width: 790px;
+            margin: 0 auto;
+        }    
+    </style>
+
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <div class="nav">
-      <div class="container">
-          <!-- Logo -->
-          <div class="row">
-              <div class="col-10 offset-1 text-center">
-                      <h1><a class="navbar-brand" href="index.php">LOGO</a></h1>
-              </div>
-              <div class="col-1">
-                <?php 
-                  cart_item();
-                ?>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col nav-item text-center">
-                  <a href="products.php">PRODUK</a>
-                  <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
-                  <a href="#">TENTANG KAMI</a>
-              </div>
-          </div>
-      </div>
-  </div>
-
-    <hr>
-    <h2 class="card-title text-center mb-3">Status Pesanan</h2>
     <div class="container order_contain">
+    <div class="d-flex justify-content-between align-items-center mt-3 container-outside">
+        <a href="index.php?all_order" class="btn btn-secondary">View Orders</a>    
+        <h2>Detail Order</h2>  
+    </div>
         <div class="order-details">
         <h2>Invoice: <span class="invoice-number"><?php echo "$invoice_number"?></span></h2>
         <div class="customer-info">
@@ -107,7 +90,7 @@ if (isset($_GET['checkout_id'])){
               <!-- Item -->
               
               <div class="cart-item">
-                  <img src="assets/img/product_images/<?php echo $product_image1 ?>" alt="<?php echo $product_title ?>" class="item-image">
+                  <img src="../assets/img/product_images/<?php echo $product_image1 ?>" alt="<?php echo $product_title ?>" class="item-image">
                   <div class="item-details">
                       <h6 class="item-name"><?php echo $product_title ?> : Rp <?php echo $formatted_price ?></h6>                         
                       <p class="item-quantity">Total Item: <?php echo $product_quantity; ?></p>
