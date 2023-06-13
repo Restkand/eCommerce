@@ -9,7 +9,7 @@
         $product_brands =$_POST['product_brands'];
         $product_genders =$_POST['product_genders'];
         $product_price =$_POST['product_price'];
-        $product_status="true";
+        $product_soldout="false";
     
         // Access Images
         $product_image1 = $_FILES['product_image1']['name'];
@@ -31,7 +31,8 @@
             move_uploaded_file($temp_image3, "../assets/img/product_images/$product_image3");
         
             //  insert query
-            $insert_products = "INSERT INTO products (product_title,product_desc,product_keywords,category_id,brand_id,gender_id,product_image1,product_image2,product_image3,product_price,date,status) values ('$product_title','$product_desc', '$product_keyw', '$product_categories', '$product_brands','$product_genders', '$product_image1', '$product_image2', '$product_image3', '$product_price', NOW(),'$product_status')";
+            $insert_products = "INSERT INTO products (product_title,product_desc,product_keywords,category_id,brand_id,gender_id,product_image1,product_image2,product_image3,product_price,sold_out,date) 
+            VALUES ('$product_title','$product_desc', '$product_keyw', '$product_categories', '$product_brands','$product_genders', '$product_image1', '$product_image2', '$product_image3', '$product_price','$product_soldout', NOW())";
             $result_query = mysqli_query($con,$insert_products);
             if($result_query){
                 echo "<script>alert('products has been inserted successfully')</script>";
@@ -53,7 +54,7 @@
         <!-- Description Product -->
         <div class="form-outline mb-4 w-50 m-auto">
             <label for="product-desc" class="from-label"> Product Description</label>
-            <input type="text" name="product_desc" id="product_desc" class="form-control" placeholder="Enter product description" autocomplete="off" required="required">
+            <textarea type="text" name="product_desc" id="product_desc" class="form-control" placeholder="Enter product description" autocomplete="off" rows="3" required="required"></textarea>
         </div> 
         
         <!-- Keywords Product -->
