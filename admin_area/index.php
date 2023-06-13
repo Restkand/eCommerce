@@ -66,7 +66,7 @@
                         </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="index.php?insert_category">Insert Categories</a></li>
-                        <li><a class="dropdown-item" href="#">View Categories</a></li>
+                        <li><a class="dropdown-item" href="index.php?view_category">View Categories</a></li>
                     </ul>
                     </li>
                     <!-- Close DropDown Categories -->
@@ -77,7 +77,7 @@
                         </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="index.php?insert_brand">Insert Brands</a></li>
-                        <li><a class="dropdown-item" href="#">View Brands</a></li>
+                        <li><a class="dropdown-item" href="index.php?view_brand">View Brands</a></li>
                     </ul>
                     </li>
                     <!-- Close DropDown Brands -->
@@ -121,6 +121,12 @@
         }
         if(isset($_GET['view_product'])){
             include('view_product.php');
+        }
+        if(isset($_GET['view_category'])){
+            include('view_category.php');
+        }
+        if(isset($_GET['view_brand'])){
+            include('view_brand.php');
         }
         ?>
     </div>
