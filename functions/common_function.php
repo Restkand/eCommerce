@@ -618,6 +618,7 @@ function info_product_checkout(){
       </div>';
   }
 }
+
 ?>
 
 

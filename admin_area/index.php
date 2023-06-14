@@ -1,3 +1,14 @@
+<?php 
+session_start();
+
+
+if(!isset($_SESSION["login"])){
+    header("Location: login_admin.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,8 +65,9 @@
                             Orders
                         </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">New Orders</a></li>
-                        <li><a class="dropdown-item" href="#">Packing Orders</a></li>
+                        <li><a class="dropdown-item" href="index.php?unpaid_order">Unpaid Orders</a></li>
+                        <li><a class="dropdown-item" href="index.php?packing_order">Packing Orders</a></li>
+                        <li><a class="dropdown-item" href="index.php?sent_order">Sent Orders</a></li>
                         <li><a class="dropdown-item" href="index.php?all_order">All Orders</a></li>
                     </ul>
                     </li>
@@ -107,11 +119,8 @@
                 </ul>    
                     <!-- LOGOUT -->
                     <ul class="d-flex navbar-nav mb-2 mb-lg-0 ms-auto">
-                        <li class="nav-ite">
-                            <p class="nav-link">Admin Name</p>
-                        </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">LogOut!</a>
+                            <a href="logout_admin.php" class="nav-link">Log Out!</a>
                         </li>
                     </ul>
             </div>
@@ -142,6 +151,15 @@
         }
         if(isset($_GET['all_order'])){
             include('all_order.php');
+        }
+        if(isset($_GET['unpaid_order'])){
+            include('unpaid_order.php');
+        }
+        if(isset($_GET['packing_order'])){
+            include('packing_order.php');
+        }
+        if(isset($_GET['sent_order'])){
+            include('sent_order.php');
         }
         ?>
     </div>

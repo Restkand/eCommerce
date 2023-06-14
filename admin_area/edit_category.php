@@ -1,4 +1,12 @@
 <?php
+    session_start();
+
+
+    if(!isset($_SESSION["login"])){
+        header("Location: login_admin.php");
+        exit;
+    }
+    
     include('../includes/connect.php');
 
     if (isset($_GET['edit_category'])){

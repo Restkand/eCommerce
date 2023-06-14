@@ -1,5 +1,14 @@
 <?php
+    session_start();
+
+
+    if(!isset($_SESSION["login"])){
+        header("Location: login_admin.php");
+        exit;
+    }
+
     include('../includes/connect.php');
+    include('../functions/pay_notif.php');
 
     if (isset($_GET['detail_checkout'])){
         global $con;
@@ -35,12 +44,9 @@
         WHERE checkout_details.sub_order_id = '$checkout_subid'";
         $result_product_query = mysqli_query($con, $product_query);
 
-        if(isset($_POST['confirm_payment'])){
-            $checkout_subid = urlencode($checkout_subid);
-            header("Location: payment.php?checkout_id=$checkout_subid");
-            exit;
+        if(isset($_POST['notif_payment'])){
+            notif_email_payment();
         }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +118,7 @@
         <?php if($status_checkout == "Menunggu Pembayaran") {?>
         <form action="" method="POST" enctype="multipart/form-data">
           <div class="text-center">
-            <button class="btn btn-primary" type="submit" name="confirm_payment" id="confirm_payment">Konfirmasi Pembayaran</button>
+            <button class="btn btn-primary" type="submit" name="notif_payment" id="notif_payment">Kirim Notifikasi Pembayaran</button>
           </div>
         </form>
         <?php } ?>
@@ -145,3 +151,5 @@
 
 </body>
 </html>
+
+<?php } ?>
