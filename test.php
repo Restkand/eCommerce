@@ -1,53 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Tombol Input File Custom</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping Label</title>
   <style>
-    .custom-file-upload {
-      position: relative;
-      display: inline-block;
-      padding: 6px 12px;
-      background-color: #f5f5f5;
-      color: #6c757d;
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .shipping-label {
+      width: 400px;
+      padding: 20px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      margin: 20px auto;
+      background-color: #fff;
+    }
+
+    .shipping-label h2 {
+      margin-top: 0;
+      font-size: 24px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #000;
+      margin-bottom: 20px;
+    }
+
+    .shipping-label .label-info {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #fff;
       border: 1px solid #ccc;
       border-radius: 5px;
-      overflow: hidden;
-      cursor: pointer;
     }
-    .custom-file-upload input[type="file"] {
-      position: absolute;
-      font-size: 100px;
-      opacity: 0;
-      right: 0;
-      top: 0;
+
+    .shipping-label .label-info .info-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #000;
     }
-    .custom-file-upload input[type="file"] + label::before {
-      content: 'Pilih File';
+
+    .shipping-label .label-info .info-details {
+      margin-bottom: 10px;
+      color: #000;
     }
-    .custom-file-upload input[type="file"]:focus + label::before {
-      outline: 1px dotted #000;
-      outline: -webkit-focus-ring-color auto 5px;
+
+    .shipping-label .label-info .info-details:last-child {
+      margin-bottom: 0;
     }
-    .custom-file-upload input[type="file"]:valid + label::before {
-      content: attr(data-file-name);
-      background-color: #28a745;
-      color: #fff;
-    }
+
   </style>
-  <script>
-    function displayFileName(event) {
-      var input = event.target;
-      var fileName = input.files[0].name;
-      var label = input.nextElementSibling;
-      label.setAttribute("data-file-name", fileName);
-    }
-  </script>
 </head>
+
 <body>
-  <label for="bukti">Pilih File Bukti Pembayaran:</label>
-  <label class="custom-file-upload">
-    <input type="file" name="bukti" id="bukti" accept=".jpg, .jpeg, .png" required onchange="displayFileName(event)">
-    <label></label>
-  </label>
+  <div class="shipping-label">
+    <h2>Shipping Label</h2>
+    <div class="label-info">
+      <p class="info-title">Nama Penerima:</p>
+      <p class="info-details">John Doe</p>
+      <p class="info-title">Alamat Penerima:</p>
+      <p class="info-details">123 Main St</p>
+      <p class="info-title">Nomor Telepon Penerima:</p>
+      <p class="info-details">08123456789</p>
+    </div>
+  </div>
 </body>
+
 </html>
