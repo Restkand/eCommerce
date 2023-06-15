@@ -39,6 +39,13 @@ $mainFontSize: 20px;
     h1 {
         margin-bottom: 10px;
     }
+
+    .navbar-brand{
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
 }
 
 .nav-item {

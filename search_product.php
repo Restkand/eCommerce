@@ -24,7 +24,7 @@ include('functions/common_function.php');
           <!-- Logo -->
           <div class="row">
               <div class="col-10 offset-1 text-center">
-                      <h1><a class="navbar-brand" href="index.php">LOGO</a></h1>
+              <a class="navbar-brand" href="index.php"><img src="assets/img/Logo_meonthrif.png" alt="LOGO"></a>
               </div>
               <div class="col-1">
                 <?php 
@@ -36,7 +36,7 @@ include('functions/common_function.php');
               <div class="col nav-item text-center">
                   <a href="products.php" class="activeNav">PRODUK</a>
                   <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
-                  <a href="#">TENTANG KAMI</a>
+                  <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>
       </div>

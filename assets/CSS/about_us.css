@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant&family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Montserrat&family=Playfair+Display&family=Suez+One&display=swap");
+:root {
+  --premiere-color: #F7F7F7;
+  --second-color:#AFB1B0;
+  --third-color: #4aa16d;
+  --option-color:#AFB1B0;
+  --base-color: #F7F7F7;
+  --font-color: #000000;
+  --header-font:"Fraunces", serif;
+  --optionHeader-font:"Playfair Display", serif;
+  --subHeader-font:"Suez One", serif;
+  --text-font: "Cormorant", serif;
+  --option-font:"Montserrat", sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: var(--header-font);
+  font-weight: 400;
+  margin-top: 0px;
+}
+
+.secondPages {
+  min-height: 73%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  margin-top: 90px;
+}
+
+.secondPages h1 {
+  position: relative;
+  font-size: 46px;
+  padding-top: 30px;
+  line-height: 0.9em;
+  color: var(--font-color);
+}
+
+.secondPages .slideAu img {
+  position: absolute;
+  height: 80%;
+  width: auto;
+  padding-top: 10px;
+  margin-left: 50px;
+  opacity: 0.9;
+  z-index: 1;
+  border-radius: 10%;
+}
+
+#slideshow img {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#slideshow img:first-child {
+  opacity: 1;
+}
+
+.fifthPages {
+  margin-top: 40px;
+  min-height: 55%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.fifthPages iframe {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.fifthPages .hatemonday h1 {
+  margin-top: 5%;
+  font-size: 45px;
+  color: var(--font-color);
+}
+
+.fifthPages .visitus h1 {
+  margin-top: 9.5%;
+  font-size: 32px;
+  color: var(--font-color);
+}
+
+.fifthPages .visitus p {
+  font-family: var(--option-font);
+}
+
+.fifthPages .visitus a {
+  font-family: var(--text-font);
+}
+
+.fifthPages a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #000000;
+}/*# sourceMappingURL=about_us.css.map */

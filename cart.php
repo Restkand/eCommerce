@@ -15,7 +15,7 @@ include('functions/common_function.php');
     <link rel="stylesheet" href="assets/CSS/cart.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <title>Keranjang Belanja | LOGO</title>
+    <title>Keranjang Belanja | meonthrift</title>
 </head>
 <body>
 
@@ -25,7 +25,7 @@ include('functions/common_function.php');
           <!-- Logo -->
           <div class="row">
               <div class="col-10 offset-1 text-center">
-                      <h1><a class="navbar-brand" href="index.php">LOGO</a></h1>
+                <a class="navbar-brand" href="index.php"><img src="assets/img/Logo_meonthrif.png" alt="LOGO"></a>
               </div>
               <div class="col-1">
                 <?php 
@@ -37,7 +37,7 @@ include('functions/common_function.php');
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
                   <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
-                  <a href="#">TENTANG KAMI</a>
+                  <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>
       </div>
@@ -72,7 +72,9 @@ $updatedQuantities = array(); // Initialize as an empty array
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update_cart'])) {
-        $quantities = $_POST['qty'];
+        // Comment Quantities
+        // $quantities = $_POST['qty'];
+        $quantities = 1;
         while ($row = mysqli_fetch_array($result_query)) {
             $product_id = $row['product_id'];
             $submittedQuantity = (int)$quantities[$product_id];
@@ -105,7 +107,9 @@ $updatedQuantities = array(); // Initialize as an empty array
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['update_cart'])) {
-        $quantities = $_POST['qty'];
+        // Comment Quantities
+        // $quantities = $_POST['qty'];
+        $quantities = 1;
         while ($row = mysqli_fetch_array($result_query)) {
             $product_id = $row['product_id'];
             $submittedQuantity = (int)$quantities[$product_id];
@@ -154,19 +158,20 @@ while ($row = mysqli_fetch_array($result_query)) {
                                 $formatted_total_price = number_format($total_price, 0, '.', '.');
                                 ?>
                                 <!-- Item -->
-                                <hr>
+                                
                                 <div class="cart-item">
                                     <img src="assets/img/product_images/<?php echo $product_image1 ?>" alt="<?php echo $product_title ?>" class="item-image">
                                     <div class="item-details">
                                         <h6 class="item-name"><?php echo $product_title ?> : Rp <?php echo $formatted_price ?></h6>
-                                        <div class="item-quantity">
+                                        <!-- Item Quantitynya di Comment soalnya barang thrift ga lebih dari 1 pcs kalop -->
+                                        <!-- <div class="item-quantity">
                                             <input type="number" class="form-control quantity-input" name="qty[<?php echo $product_id ?>]" value="<?php echo $updatedQuantities[$product_id]; ?>" min="1">
-                                        </div>
-                                        
+                                        </div> -->
                                         <p class="item-price">Total : Rp <?php echo number_format($product_values, 0, '.', '.'); ?></p>
                                         <button class="btn btn-danger btn-remove mt-1" name="remove_cart" value="<?php echo $product_id ?>">Remove Cart</button>
                                     </div>
                                 </div>
+                                <hr>
                             <?php } ?>
                             <!-- Add more items here -->
                         </div>
@@ -188,7 +193,8 @@ while ($row = mysqli_fetch_array($result_query)) {
                     </div>
                 </div>
             </div>
-        <input type="submit" value="Update Cart" class="btn btn-danger btn-remove mt-3" name="update_cart">
+        <!--Update Cart Button  -->
+        <!-- <input type="submit" value="Update Cart" class="btn btn-danger btn-remove mt-3" name="update_cart"> -->
     </form>
 </div>
 <?php } ?>

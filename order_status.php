@@ -55,7 +55,7 @@ if (isset($_GET['checkout_id'])){
     <link rel="stylesheet" href="assets/CSS/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <title>Produk | LOGO</title>
+    <title>Order Status | meonthrift</title>
 </head>
 <body>
 
@@ -65,7 +65,7 @@ if (isset($_GET['checkout_id'])){
           <!-- Logo -->
           <div class="row">
               <div class="col-10 offset-1 text-center">
-                      <h1><a class="navbar-brand" href="index.php">LOGO</a></h1>
+              <a class="navbar-brand" href="index.php"><img src="assets/img/Logo_meonthrif.png" alt="LOGO"></a>
               </div>
               <div class="col-1">
                 <?php 
@@ -77,7 +77,7 @@ if (isset($_GET['checkout_id'])){
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
                   <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
-                  <a href="#">TENTANG KAMI</a>
+                  <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>
       </div>

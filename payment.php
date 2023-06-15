@@ -58,7 +58,7 @@ if (isset($_GET['checkout_id'])){
       span.setAttribute("data-file-name", fileName);
     }
   </script>
-    <title>Produk | LOGO</title>
+    <title>Payment | meonthrift</title>
 </head>
 <body>
 
@@ -68,7 +68,7 @@ if (isset($_GET['checkout_id'])){
           <!-- Logo -->
           <div class="row">
               <div class="col-10 offset-1 text-center">
-                      <h1><a class="navbar-brand" href="index.php">LOGO</a></h1>
+              <a class="navbar-brand" href="index.php"><img src="assets/img/Logo_meonthrif.png" alt="LOGO"></a>
               </div>
               <div class="col-1">
                 <?php 
@@ -80,7 +80,7 @@ if (isset($_GET['checkout_id'])){
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
                   <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
-                  <a href="#">TENTANG KAMI</a>
+                  <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>
       </div>

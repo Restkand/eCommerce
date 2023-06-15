@@ -47,6 +47,11 @@
         if(isset($_POST['notif_payment'])){
             notif_email_payment();
         }
+
+        if(isset($_POST['print_label'])){
+            header("Location:  label.php?checkout_id=$checkout_subid");
+            exit;
+        }
 ?>
 
 <!DOCTYPE html>
@@ -123,9 +128,11 @@
         </form>
         <?php } ?>
         <?php if($status_checkout == "Sedang di Packing") {?>
-        <div class="text-center">
-            <!-- <h3>Mohon Menunggu</h3> -->
-        </div>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit" name="print_label" id="print_label">Print Label</button>
+            </div>
+        </form>
         <?php } ?>
         <?php if($status_checkout == "Sedang di Kirim") {?>
         <div class="text-center">
