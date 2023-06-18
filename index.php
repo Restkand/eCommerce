@@ -14,6 +14,14 @@ include('functions/common_function.php')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <title>Home | meonthrift</title>
+    <style>
+    .carousel-item img {
+      object-fit: contain;
+      height: auto;
+      max-height: 480px; /* Adjust the desired height here */
+      max-width: 100%;
+    }
+    </style>
 </head>
 <body>
 
@@ -46,14 +54,14 @@ include('functions/common_function.php')
       <div id="carouselExampleFade" class="carousel carousel-dark slide carousel-fade " data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="assets/img/Banner.png" class="d-block w-100" alt="Banner">
+              <img src="assets/img/Banner1_meonthrift.png" class="d-block w-100" alt="Banner">
             </div>
             <div class="carousel-item">
-              <img src="assets/img/Banner2.png" class="d-block w-100" alt="Banner2">
+              <img src="assets/img/Banner2_meonthrift.png" class="d-block w-100" alt="Banner2">
             </div>
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
               <img src="assets/img/Banner3.png" class="d-block w-100" alt="Banner3">
-            </div>
+            </div> -->
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

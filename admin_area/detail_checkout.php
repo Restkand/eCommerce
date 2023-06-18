@@ -49,7 +49,22 @@
         }
 
         if(isset($_POST['print_label'])){
-            header("Location:  label.php?checkout_id=$checkout_subid");
+            echo '<script>window.open("label.php?checkout_id='.$checkout_subid.'", "_blank");</script>';
+        }
+
+        if(isset($_POST['insert_resi'])){
+            header("Location:  insert_resi.php?checkout_id=$checkout_subid");
+            exit;
+        }
+
+        if(isset($_POST['tracking_resi'])){
+            // ???
+        }
+
+        if(isset($_POST['order_received'])){
+            $update_status = "UPDATE checkout_details SET status_checkout = 'Pesanan di Terima' WHERE sub_order_id = '$checkout_subid'";
+            mysqli_query($con,$update_status);
+            header("Location:  detail_checkout.php?detail_checkout=$checkout_subid");
             exit;
         }
 ?>
@@ -129,15 +144,27 @@
         <?php } ?>
         <?php if($status_checkout == "Sedang di Packing") {?>
         <form action="" method="POST" enctype="multipart/form-data">
-            <div class="text-center">
-                <button class="btn btn-primary" type="submit" name="print_label" id="print_label">Print Label</button>
+            <div class="row mt-3">
+                <div class="col-6 d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit" name="insert_resi" id="insert_resi">Masukan Resi</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary" type="submit" name="print_label" id="print_label">Print Label</button>
+                </div>
             </div>
         </form>
         <?php } ?>
         <?php if($status_checkout == "Sedang di Kirim") {?>
-        <div class="text-center">
-         <button class="btn btn-primary">Lacak Pesanan</button>
-        </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+            <div class="row mt-3">
+                <div class="col-6 d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit" name="tracking_resi" id="tracking_resi">Lacak Pesanan</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary" type="submit" name="order_received" id="order_received">Pesanan di Terima</button>
+                </div>
+            </div>
+        </form>
         <?php } ?>
         <?php if($status_checkout == "Pesanan di Terima") {?>
         <div class="text-center">
