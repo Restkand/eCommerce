@@ -1,0 +1,9 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/n1579292/public_html/
+    - /bin/cp * $DEPLOYPATH
+    - /bin/cp -R PDF $DEPLOYPATH
+    - /bin/cp -R admin_area $DEPLOYPATH
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R functions $DEPLOYPATH
