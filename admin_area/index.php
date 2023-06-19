@@ -7,6 +7,44 @@ if(!isset($_SESSION["login"])){
     exit;
 }
 
+include('../includes/connect.php');
+include('../functions/admin_sort.php');
+
+global $con;
+
+if(isset($_POST['search_data_order'])){
+    $search_data_value = $_POST['search_data'];
+    $select_query = "SELECT * FROM checkout_details WHERE invoice_number LIKE '%$search_data_value%'";
+    $result_query = mysqli_query($con, $select_query);
+  
+    if(mysqli_num_rows($result_query) > 0) {
+      $row = mysqli_fetch_array($result_query);
+      $sub_orderid = $row['sub_order_id'];
+      $checkout_subid = urlencode($sub_orderid);
+      header("Location: detail_checkout.php?detail_checkout=$checkout_subid");
+      exit;
+    } else {
+      // Tampilkan pesan jika data tidak ditemukan
+      echo "<script>alert('Nomor Invoice tidak ditemukan')</script>";
+    }
+  }
+
+  if(isset($_POST['search_data_product'])){
+    $search_data_value = $_POST['search_product'];
+    $select_query = "SELECT * FROM products WHERE product_title LIKE '%$search_data_value%'";
+    $result_query = mysqli_query($con, $select_query);
+  
+    if(mysqli_num_rows($result_query) > 0) {
+      $row = mysqli_fetch_array($result_query);
+      $product_id = $row['product_id'];
+      $checkout_subid = urlencode($product_id);
+      header("Location: edit_product.php?edit_product=$checkout_subid");
+      exit;
+    } else {
+      // Tampilkan pesan jika data tidak ditemukan
+      echo "<script>alert('Product tidak ditemukan')</script>";
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +55,7 @@ if(!isset($_SESSION["login"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/favicon/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <title>Dashboard Admin</title>
     <style>
     .container {

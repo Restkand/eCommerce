@@ -30,6 +30,7 @@
         $result_query_inv = mysqli_query($con, $select_query_inv);
         while($row_inv = mysqli_fetch_array($result_query_inv)){
             $status_checkout = $row_inv['status_checkout'];
+            $invoice_number = $row_inv['invoice_number'];
             $no_resi = $row_inv['no_resi'];
         }
 
@@ -38,6 +39,7 @@
             $nama_penerima =$_POST['nama_penerima'];
             $telepon_penerima =$_POST['telepon_penerima'];
             $alamat_penerima =$_POST['alamat_penerima'];
+            $email_penerima =$_POST['email_penerima'];
             $ongkir =$_POST['ongkir'];
             $status_checkout =$_POST['status_checkout'];
             $no_resi =$_POST['no_resi'];
@@ -49,6 +51,9 @@
             }
             if (!empty($telepon_penerima)) {
                 $sql .= "telepon_penerima = '$telepon_penerima', ";
+            }
+            if (!empty($email_penerima)) {
+                $sql .= "email_penerima = '$email_penerima', ";
             }
             if (!empty($alamat_penerima)) {
                 $sql .= "alamat_penerima = '$alamat_penerima', ";
@@ -130,6 +135,7 @@
         <a href="index.php?all_order" class="btn btn-secondary">View Orders</a>    
         <h2>Edit Order</h2>  
         </div>
+        <h5><?php echo $invoice_number ?></h5>
         <form action="" enctype="multipart/form-data" method="POST">
             <div class="form-group">
                 <label for="nama_penerima">Nama Penerima : <?php echo "$nama_penerima" ?></label>
@@ -137,11 +143,15 @@
             </div>
             <div class="form-group">
                 <label for="telepon_penerima">Telepon Penerima </label>
-                <textarea type="text" class="form-control" id="telepon_penerima" name="telepon_penerima" ></textarea>
+                <input type="text" class="form-control" id="telepon_penerima" name="telepon_penerima" >
+            </div>
+            <div class="form-group">
+                <label for="email_penerima">Email Penerima </label>
+                <input type="email" class="form-control" id="email_penerima" name="email_penerima" >
             </div>
             <div class="form-group">
                 <label for="alamat_penerima">Alamat Penerima </label>
-                <input type="text" class="form-control" id="alamat_penerima" name="alamat_penerima" rows="3">
+                <textarea type="text" class="form-control" id="alamat_penerima" name="alamat_penerima" rows="3"></textarea>
             </div>
 
             <div class="form-group">
