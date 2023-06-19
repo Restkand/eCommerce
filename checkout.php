@@ -30,6 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           // Jika belum ada, tambahkan baris baru
           $separatedRows[$sub_order_id][$product_id] = $row;
       }
+
+      $soldout_query = "UPDATE products SET sold_out= 1 WHERE product_id = $product_id";
+      mysqli_query($con, $soldout_query);
     }
     
     foreach ($separatedRows as $sub_order_id => $products) {
@@ -46,6 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $delete_cart = "DELETE FROM cart_details WHERE sub_order_id = $checkout_id";
     mysqli_query($con, $delete_cart);
+
+    
+
     $checkout_id = urlencode($checkout_id);
     header("Location: payment.php?checkout_id=$checkout_id");
     exit;
@@ -88,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="row">
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
-                  <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
+                  <a  href="cek_pesanan.php">CEK PESANAN</a>
                   <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>

@@ -52,7 +52,7 @@ function get_product_retail(){
       if(!isset($_GET['brand'])){
         if(!isset($_GET['gender'])){
           // $select_query = "SELECT * FROM products where category_id = 1";
-          $select_query = "SELECT * FROM products ORDER BY product_id DESC";
+          $select_query = "SELECT * FROM products where sold_out = 0 ORDER BY product_id DESC";
           $result_query = mysqli_query($con, $select_query);
           // $row = mysqli_fetch_assoc($result_query);
           // echo $row['product_title'];
@@ -92,7 +92,7 @@ function get_uniqe_categories(){
     $category_id = $_GET['category'];
 
     global $con;
-    $select_query = "SELECT * FROM products where category_id = $category_id ORDER BY product_id DESC";
+    $select_query = "SELECT * FROM products where category_id = $category_id  ORDER BY product_id DESC";
     $result_query = mysqli_query($con, $select_query);
     // $row = mysqli_fetch_assoc($result_query);
     // echo $row['product_title'];
@@ -131,7 +131,7 @@ function get_uniqe_retail_brands(){
 
     global $con;
     // $select_query = "SELECT * FROM products where category_id = 1 AND brand_id = $brand_id";
-    $select_query = "SELECT * FROM products where brand_id = $brand_id ORDER BY product_id DESC";
+    $select_query = "SELECT * FROM products where brand_id = $brand_id AND sold_out = 0 ORDER BY product_id DESC";
     $result_query = mysqli_query($con, $select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows == 0){
@@ -175,7 +175,7 @@ function get_uniqe_retail_genders(){
 
     global $con;
     // $select_query = "SELECT * FROM products where category_id = 1 AND gender_id = $gender_id";
-    $select_query = "SELECT * FROM products where gender_id = $gender_id ORDER BY product_id DESC";
+    $select_query = "SELECT * FROM products where gender_id = $gender_id AND sold_out = 0 ORDER BY product_id DESC";
     $result_query = mysqli_query($con, $select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows == 0){
@@ -218,7 +218,7 @@ function get_uniqe_retail_category(){
 
     global $con;
     // $select_query = "SELECT * FROM products where category_id = 1 AND gender_id = $gender_id";
-    $select_query = "SELECT * FROM products where category_id = $category_id ORDER BY product_id DESC";
+    $select_query = "SELECT * FROM products where category_id = $category_id AND sold_out = 0 ORDER BY product_id DESC";
     $result_query = mysqli_query($con, $select_query);
     $num_of_rows=mysqli_num_rows($result_query);
     if($num_of_rows == 0){

@@ -64,58 +64,73 @@ function generateProductViewer(){
             $formatted_price = number_format($product_price, 0, ',','.');
             $brand_id = $row['brand_id'];
             $gender_id = $row['gender_id'];
+            $sold_out = $row['sold_out'];
             
-          // Output the HTML and JavaScript code using echo
-          echo '<div class="container">
-          <div class="row">
-              <div class="col-md-4 offset-2">
-                  <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="product-image" id="mainImage">
-              </div>
-              <div class="col-md-6">
-                  <h2 class="mb-3">'.$product_title.'</h2>
-                  <p class="mb-3">'.$product_desc.'</p>
-                  <p class="mb-3">RP '.$formatted_price.'</p>
-                  <a href="products.php?add_to_cart='.$product_id.'"><button class="btn btn-secondary add-to-cart-button">Masukan Ke Keranjang</button></a>
-              </div>
-          </div>';
+            if($sold_out == false){
+                // Output the HTML and JavaScript code using echo
+                echo '<div class="container">
+                <div class="row">
+                    <div class="col-md-4 offset-2">
+                        <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="product-image" id="mainImage">
+                    </div>
+                    <div class="col-md-6">
+                        <h2 class="mb-3">'.$product_title.'</h2>
+                        <p class="mb-3">'.$product_desc.'</p>
+                        <p class="mb-3">RP '.$formatted_price.'</p>
+                        <a href="products.php?add_to_cart='.$product_id.'"><button class="btn btn-secondary add-to-cart-button">Masukan Ke Keranjang</button></a>
+                    </div>
+                </div>';
 
-          if (!empty($product_image2) && !empty($product_image3)) {
-            echo '<div class="row mt-4">
+                if (!empty($product_image2) && !empty($product_image3)) {
+                    echo '<div class="row mt-4">
+                        <div class="col-md-4 offset-2">
+                            <div class="d-flex flex-wrap">
+                                <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
+                                <img src="assets/img/product_images/'.$product_image2.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image2.'\')">
+                                <img src="assets/img/product_images/'.$product_image3.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image3.'\')">
+                            </div>
+                        </div>
+                    </div>';
+                } elseif (!empty($product_image2)) {
+                    echo '<div class="row mt-4">
+                        <div class="col-md-4 offset-2">
+                            <div class="d-flex flex-wrap">
+                                <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
+                                <img src="assets/img/product_images/'.$product_image2.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image2.'\')">
+                            </div>
+                        </div>
+                    </div>';
+                } elseif (!empty($product_image3)) {
+                    echo '<div class="row mt-4">
+                        <div class="col-md-4 offset-2">
+                            <div class="d-flex flex-wrap">
+                                <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
+                                <img src="assets/img/product_images/'.$product_image3.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image3.'\')">
+                            </div>
+                        </div>
+                    </div>';
+                } else {
+                    echo '<div class="row mt-4">
+                        <div class="col-md-4 offset-2">
+                            <div class="d-flex flex-wrap">
+                                <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
+                            </div>
+                        </div>
+                    </div>';
+                }
+            }
+
+            else{
+                echo '<div class="container">
+                <div class="row">
                 <div class="col-md-4 offset-2">
-                    <div class="d-flex flex-wrap">
-                        <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
-                        <img src="assets/img/product_images/'.$product_image2.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image2.'\')">
-                        <img src="assets/img/product_images/'.$product_image3.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image3.'\')">
-                    </div>
+                <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="product-image" id="mainImage">
                 </div>
-            </div>';
-        } elseif (!empty($product_image2)) {
-            echo '<div class="row mt-4">
-                <div class="col-md-4 offset-2">
-                    <div class="d-flex flex-wrap">
-                        <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
-                        <img src="assets/img/product_images/'.$product_image2.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image2.'\')">
-                    </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                    <h2 class="mb-3">Sorry, Product SOLD OUT!</h2>
                 </div>
-            </div>';
-        } elseif (!empty($product_image3)) {
-            echo '<div class="row mt-4">
-                <div class="col-md-4 offset-2">
-                    <div class="d-flex flex-wrap">
-                        <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
-                        <img src="assets/img/product_images/'.$product_image3.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image3.'\')">
-                    </div>
-                </div>
-            </div>';
-        } else {
-            echo '<div class="row mt-4">
-                <div class="col-md-4 offset-2">
-                    <div class="d-flex flex-wrap">
-                        <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
-                    </div>
-                </div>
-            </div>';
-        }
+                </div>';
+            }
 
           echo '<script>
           window.addEventListener(\'DOMContentLoaded\', function() {

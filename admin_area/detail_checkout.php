@@ -36,6 +36,7 @@
         while($row_inv = mysqli_fetch_array($result_query_inv)){
             $invoice_number = $row_inv['invoice_number'];
             $status_checkout = $row_inv['status_checkout'];
+            $no_resi = $row_inv['no_resi'];
         }
 
         // Menampilkan Product
@@ -63,7 +64,7 @@
         }
 
         if(isset($_POST['tracking_resi'])){
-            // ???
+            echo '<script>window.open("https://www.jne.co.id/id/tracking/trace", "_blank");</script>';
         }
 
         if(isset($_POST['order_received'])){
@@ -108,7 +109,9 @@
             <p><strong>Nama:</strong> <?php echo "$nama_penerima"?></p>
             <p><strong>Telepon:</strong> <?php echo "$telepon_penerima"?></p>
             <p><strong>Alamat:</strong> <?php echo "$alamat_penerima"?></p>
-
+            <?php if($status_checkout == "Sedang di Kirim") {?>
+                <p><strong>Nomor Resi:</strong> JNE - <?php echo $no_resi?></p>
+            <?php }?>
         </div>
         <div class="product-info">
             <h3>Produk yang Dibeli</h3>
@@ -172,7 +175,7 @@
             <form action="" method="POST" enctype="multipart/form-data">
             <div class="row mt-3">
                 <div class="col-6 d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit" name="tracking_resi" id="tracking_resi">Lacak Pesanan</button>
+                    <button class="btn btn-primary" type="submit" name="tracking_resi" id="tracking_resi">Lacak Pesanan</button>
                 </div>
                 <div class="col-6">
                     <button class="btn btn-primary" type="submit" name="order_received" id="order_received">Pesanan di Terima</button>

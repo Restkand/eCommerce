@@ -44,7 +44,7 @@
           echo "<td>$status_checkout</td>";
           echo "<td>";
           echo "<a href='detail_checkout.php?detail_checkout=$checkout_id' class='btn btn-primary'>Detail Order</a> ";
-        //   echo "<a href='delete_checkout.php?id=$checkout_id' class='btn btn-danger'>Hapus</a>";
+          echo "<a href='edit_order.php?edit_order=$checkout_id' class='btn btn-danger'>Edit Order</a>";
           echo "</td>";
           echo "</tr>";
 

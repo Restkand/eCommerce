@@ -37,7 +37,7 @@ include('functions/common_function.php');
           <div class="row">
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
-                  <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
+                  <a  href="cek_pesanan.php">CEK PESANAN</a>
                   <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>
