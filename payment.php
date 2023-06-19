@@ -30,7 +30,7 @@ if (isset($_GET['checkout_id'])){
                          VALUES ('$checkout_subid','$invoice_number','$bukti_image')";
         $result_query = mysqli_query($con,$insert_bukti);
         
-        $update_status = "UPDATE checkout_details SET status_checkout = 'Sedang di Packing' WHERE sub_order_id = '$checkout_subid'";
+        $update_status = "UPDATE checkout_details SET status_checkout = 'Konfirmasi Pembayaran' WHERE sub_order_id = '$checkout_subid'";
         mysqli_query($con,$update_status);
 
         $checkout_subid = urlencode($checkout_subid);

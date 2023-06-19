@@ -29,6 +29,7 @@ if (isset($_GET['checkout_id'])){
   while($row_inv = mysqli_fetch_array($result_query_inv)){
       $invoice_number = $row_inv['invoice_number'];
       $status_checkout = $row_inv['status_checkout'];
+      $no_resi = $row_inv['no_resi'];
   }
 
   // Menampilkan Product
@@ -134,6 +135,11 @@ if (isset($_GET['checkout_id'])){
           </div>
         </form>
         <?php } ?>
+        <?php if($status_checkout == "Konfirmasi Pembayaran") {?>
+          <div class="text-center">
+            <h4>Mohon menunggu konfirmasi pembayaran oleh Admin meonthrift</h4>
+          </div>
+        <?php } ?>
         <?php if($status_checkout == "Sedang di Packing") {?>
         <div class="text-center">
             <!-- <h3>Mohon Menunggu</h3> -->
@@ -141,7 +147,8 @@ if (isset($_GET['checkout_id'])){
         <?php } ?>
         <?php if($status_checkout == "Sedang di Kirim") {?>
         <div class="text-center">
-         <button class="btn btn-primary">Lacak Pesanan</button>
+          <h5>JNE - <?php echo $no_resi?></h5>
+          <a href="https://www.jne.co.id/id/tracking/trace" target="_blank"><button class="btn btn-primary">Lacak Pesanan</button></a>
         </div>
         <?php } ?>
         <?php if($status_checkout == "Pesanan di Terima") {?>

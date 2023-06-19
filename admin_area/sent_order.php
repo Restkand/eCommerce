@@ -3,11 +3,12 @@
 ?>
 
 <div class="container">
-    <h1 class="text-center mb-3">Unpaid Order</h1>
+    <h1 class="text-center mb-3">Sent Order</h1>
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Inovice Number</th>
+          <th>Resi Pengiriman</th>
           <th>Status Pesanan</th>
           <th>Aksi</th>
         </tr>
@@ -38,6 +39,7 @@
 
           echo "<tr>";
           echo "<td>$invoice_number</td>";
+          echo "<td>$no_resi</td>";
           echo "<td>$status_checkout</td>";
           echo "<td>";
           echo "<a href='detail_checkout.php?detail_checkout=$checkout_id' class='btn btn-primary'>Detail Order</a> ";

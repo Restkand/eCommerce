@@ -19,7 +19,7 @@
         global $con;
 
         // Query untuk mendapatkan data checkout
-        $select_query = "SELECT * FROM checkout_details WHERE status_checkout = 'Menunggu Pembayaran'";
+        $select_query = "SELECT * FROM checkout_details WHERE status_checkout = 'Menunggu Pembayaran' OR  status_checkout = 'Konfirmasi Pembayaran'";
         $select_result = mysqli_query($con, $select_query);
 
         $previous_checkout_id = null;

@@ -48,6 +48,11 @@
             notif_email_payment();
         }
 
+        if(isset($_POST['check_payment'])){
+            header("Location:  check_payment.php?checkout_id=$checkout_subid");
+            exit;
+        }
+
         if(isset($_POST['print_label'])){
             echo '<script>window.open("label.php?checkout_id='.$checkout_subid.'", "_blank");</script>';
         }
@@ -75,7 +80,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=`, initial-scale=1.0">
-    <link rel="icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../assets/CSS/order_status.css">
     <link rel="stylesheet" href="../assets/CSS/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -103,6 +108,7 @@
             <p><strong>Nama:</strong> <?php echo "$nama_penerima"?></p>
             <p><strong>Telepon:</strong> <?php echo "$telepon_penerima"?></p>
             <p><strong>Alamat:</strong> <?php echo "$alamat_penerima"?></p>
+
         </div>
         <div class="product-info">
             <h3>Produk yang Dibeli</h3>
@@ -140,6 +146,13 @@
         <form action="" method="POST" enctype="multipart/form-data">
           <div class="text-center">
             <button class="btn btn-primary" type="submit" name="notif_payment" id="notif_payment">Kirim Notifikasi Pembayaran</button>
+          </div>
+        </form>
+        <?php } ?>
+        <?php if($status_checkout == "Konfirmasi Pembayaran") {?>
+        <form action="" method="POST" enctype="multipart/form-data">
+          <div class="text-center">
+            <button class="btn btn-primary" type="submit" name="check_payment" id="notif_payment">Cek Pembayaran</button>
           </div>
         </form>
         <?php } ?>

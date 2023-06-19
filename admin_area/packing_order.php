@@ -3,7 +3,7 @@
 ?>
 
 <div class="container">
-    <h1 class="text-center mb-3">Unpaid Order</h1>
+    <h1 class="text-center mb-3">Packing Order</h1>
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
