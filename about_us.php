@@ -10,6 +10,7 @@ include('functions/common_function.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=`, initial-scale=1.0">
+    <link rel="icon" href="assets/favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/CSS/main.css">
     <link rel="stylesheet" href="assets/CSS/menuBelanja.css">
     <link rel="stylesheet" href="assets/CSS/about_us.css">
@@ -54,10 +55,10 @@ include('functions/common_function.php');
     <div class="secondPages">
         <div class="container">
             <div class="row">
-                <div class="offset-1 col-5">
+                <div class="offset-md-1 col-md-5 col-sm-12">
                     <h1>At meonthrift<br><br>Our mission is to create a platform that connects individuals who want to buy and sell pre-loved items in a safe and convenient way.<br><br>We believe in promoting sustainability by giving items a second chance and reducing waste.</h1>
                 </div>
-                <div class="col-6 slideAu" id="slideshow">
+                <div class="col-md-6 slideAu" id="slideshow">
                     <img src="assets/img/about_us1.jpg" alt="Slide AU 1">
                     <img src="assets/img/about_us2.jpg" alt="Slide AU 2">
                     <img src="assets/img/about_us3.jpg" alt="Slide AU 3">
@@ -69,10 +70,10 @@ include('functions/common_function.php');
     <div class="fifthPages">
         <div class="container">
             <div class="row">
-                <div class="offset-1 col-6">
+                <div class="offset-lg-1 col-lg-6 col-md-12">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.90449225328788!2d106.95172667665295!3d-6.201310024886833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698b70ec0707cb%3A0x623e17abd7b248b2!2sJl.%20PG%20Indah%20Blok%20J12%20No.25%2C%20RT.8%2FRW.6%2C%20Pulo%20Gebang%2C%20Kec.%20Cakung%2C%20Kota%20Jakarta%20Timur%2C%20Daerah%20Khusus%20Ibukota%20Jakarta%2013950!5e0!3m2!1sen!2sid!4v1686833032847!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="col-5 visitus">
+                <div class="col-lg-5 col-md-12 visitus">
                     <br>
                     <h1>Our Place</h1>
                     <p>Jl. PG Indah Blok J12 No.25, RT.8/RW.6, <br>Pulo Gebang, Kec. Cakung, Kota Jakarta Timur, <br>Daerah Khusus Ibukota Jakarta 13950</p>

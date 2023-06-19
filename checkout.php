@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=`, initial-scale=1.0">
+    <link rel="icon" href="assets/favicon/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/CSS/main.css">
     <link rel="stylesheet" href="assets/CSS/menuBelanja.css">
     <link rel="stylesheet" href="assets/CSS/info_penerima.css">
