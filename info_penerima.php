@@ -28,14 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $product_values = $row['product_price'] * $product_quantity;
       $total_price_product += $product_values;
     }
-
+    
     // Mendapatkan data dari form
     $nama_penerima = $_POST['inputNama'];
     $telepon_penerima = $_POST['inputTelepon'];
     $email_penerima = $_POST['inputEmail'];
     $kota_pengirim = '154';
     $kota_penerima = $_POST['kota_tujuan'];
+    $nama_kota = $data -> get_city_name($kota_penerima);
+    $provinsi_penerima = $_POST['inputProvinsi'];
+    $kodepos_penerima = $_POST['inputKodepos'];
     $alamat_penerima = $_POST['inputAlamat'];
+    $alamat_penerima = "$alamat_penerima, $nama_kota, $provinsi_penerima, $kodepos_penerima";
     $weight = '1000';
     $total_price_product;
 
@@ -143,6 +147,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="inputEmail" class="form-label">Email</label>
                     <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Masukkan Email">
                   </div>
+                  <div class="mb-3">
+                    <label for="inputAlamat" class="form-label">Alamat Lengkap</label>
+                    <textarea type="text" class="form-control" id="inputAlamat" name="inputAlamat" placeholder="Masukkan Alamat Penerima"></textarea>
+                  </div>
                   <!-- Pengisian Alamat Dan Cek Ongkir -->
                   <div class="mb-3">
                     <label for="kota_tujuan" class="form-label">Kota Tujuan</label>
@@ -153,11 +161,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                       <?php endforeach; ?>
                     </select>
                   </div>
-                  <!-- Akhiran Alamat -->
                   <div class="mb-3">
-                    <label for="inputAlamat" class="form-label">Alamat Lengkap</label>
-                    <input type="text" class="form-control" id="inputAlamat" name="inputAlamat" placeholder="Masukkan Alamat Penerima">
+                    <label for="inputProvinsi" class="form-label">Provinsi</label>
+                    <input type="text" class="form-control" id="inputProvinsi" name="inputProvinsi" placeholder="Masukkan Provinsi">
                   </div>
+                  <div class="mb-3">
+                    <label for="inputKodepos" class="form-label">Kode Pos</label>
+                    <input type="text" class="form-control" id="inputKodepos" name="inputKodepos" placeholder="Masukkan Kode Pos">
+                  </div>
+                  <!-- Akhiran Alamat -->
                     <input type="submit" value="Bayar" class="btn btn-primary" id="btn-periksa-ongkir">
               </div>
             </div>
