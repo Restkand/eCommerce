@@ -393,13 +393,18 @@ function search_invoice_order(){
     $search_data_value = $_GET['search_order'];
     $select_query = "SELECT * FROM checkout_details where invoice_number LIKE '%$search_data_value%'";
     $result_query = mysqli_query($con, $select_query);
+    $num_of_rows=mysqli_num_rows($result_query);
+    if($num_of_rows == 0){
+      echo "<script>alert('Nomor Invoice Tidak Ditemukan')</script>";
+    }
+    else{
     while($row = mysqli_fetch_array($result_query)){
       $sub_orderid = $row['sub_order_id'];
-  }
+    }
     $checkout_subid = urlencode($sub_orderid);
     header("Location: order_status.php?checkout_id=$checkout_subid");
     exit;
-
+    }
   }
 }
 

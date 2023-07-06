@@ -14,7 +14,7 @@ function footer(){
         <div class="col-md-4">
             <h5>Contact Us</h5>
             <p>Email: info@meonthrift.id</p>
-            <p>Phone: +62895339928113</p>
+            <p>Phone: +6281318530134</p>
         </div>
         <div class="col-md-4">
             <h5>Follow Us</h5>
