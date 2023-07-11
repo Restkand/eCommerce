@@ -70,10 +70,10 @@ function generateProductViewer(){
                 // Output the HTML and JavaScript code using echo
                 echo '<div class="container">
                 <div class="row">
-                    <div class="col-md-4 offset-2">
+                    <div class="col-lg-12 col-xl-4 offset-xl-2">
                         <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="product-image" id="mainImage">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-12 col-xl-6">
                         <h2 class="mb-3">'.$product_title.'</h2>
                         <p class="mb-3">'.$product_desc.'</p>
                         <p class="mb-3">RP '.$formatted_price.'</p>
@@ -83,7 +83,7 @@ function generateProductViewer(){
 
                 if (!empty($product_image2) && !empty($product_image3)) {
                     echo '<div class="row mt-4">
-                        <div class="col-md-4 offset-2">
+                        <div class="col-lg-12 col-xl-4 offset-2">
                             <div class="d-flex flex-wrap">
                                 <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
                                 <img src="assets/img/product_images/'.$product_image2.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image2.'\')">
@@ -93,7 +93,7 @@ function generateProductViewer(){
                     </div>';
                 } elseif (!empty($product_image2)) {
                     echo '<div class="row mt-4">
-                        <div class="col-md-4 offset-2">
+                        <div class="col-lg-12 col-xl-4 offset-2">
                             <div class="d-flex flex-wrap">
                                 <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
                                 <img src="assets/img/product_images/'.$product_image2.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image2.'\')">
@@ -102,7 +102,7 @@ function generateProductViewer(){
                     </div>';
                 } elseif (!empty($product_image3)) {
                     echo '<div class="row mt-4">
-                        <div class="col-md-4 offset-2">
+                        <div class="col-xl-4 offset-2">
                             <div class="d-flex flex-wrap">
                                 <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
                                 <img src="assets/img/product_images/'.$product_image3.'" alt="Product Image" class="thumbnail-image" onclick="changeImage(\'assets/img/product_images/'.$product_image3.'\')">
@@ -111,7 +111,7 @@ function generateProductViewer(){
                     </div>';
                 } else {
                     echo '<div class="row mt-4">
-                        <div class="col-md-4 offset-2">
+                        <div class="col-xl-4 offset-2">
                             <div class="d-flex flex-wrap">
                                 <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="thumbnail-image active" onclick="changeImage(\'assets/img/product_images/'.$product_image1.'\')">
                             </div>
@@ -123,7 +123,7 @@ function generateProductViewer(){
             else{
                 echo '<div class="container">
                 <div class="row">
-                <div class="col-md-4 offset-2">
+                <div class="col-lg-4 offset-2">
                 <img src="assets/img/product_images/'.$product_image1.'" alt="Product Image" class="product-image" id="mainImage">
                 </div>
                 <div class="col-md-6 d-flex align-items-center justify-content-center">

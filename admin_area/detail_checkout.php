@@ -9,6 +9,7 @@
 
     include('../includes/connect.php');
     include('../functions/pay_notif.php');
+    include('../functions/mailer_function.php');
 
     if (isset($_GET['detail_checkout'])){
         global $con;
@@ -21,6 +22,7 @@
             $nama_penerima = $row['nama_penerima'];
             $telepon_penerima = $row['telepon_penerima'];
             $alamat_penerima = $row['alamat_penerima'];
+            $email_penerima = $row ['email_penerima'];
             $ongkir = $row['ongkos_kirim'];
             $subtotal = $row['harga_product'];
             $subtotal_format = number_format($subtotal, 0, '.', '.'); 
@@ -46,7 +48,7 @@
         $result_product_query = mysqli_query($con, $product_query);
 
         if(isset($_POST['notif_payment'])){
-            notif_email_payment();
+            sendNotificationPaymentEmailtoCustomer($nama_penerima, $email_penerima, $invoice_number);
         }
 
         if(isset($_POST['check_payment'])){
@@ -172,6 +174,9 @@
         </form>
         <?php } ?>
         <?php if($status_checkout == "Sedang di Kirim") {?>
+            <div class="text-center">
+            <h5>JNE - <?php echo $no_resi?></h5>
+            </div>
             <form action="" method="POST" enctype="multipart/form-data">
             <div class="row mt-3">
                 <div class="col-6 d-flex justify-content-end">

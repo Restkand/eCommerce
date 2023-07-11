@@ -18,6 +18,7 @@ include('functions/common_function.php')
     <meta name="keywords" content="meonthrift, fashion preloved, gaya unik, eksklusif, stylish, harga terjangkau">
     <meta name="author" content="Meonthrift">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="J5UMjEkj7sgsRJCsXa1n456RY1hUh9j4EWQGrCK1Iao" />
     <style>
     .carousel-item img {
       object-fit: contain;
@@ -83,7 +84,7 @@ include('functions/common_function.php')
     <div class="container">
         <!-- Title New Arrivals -->
       <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-md-12 text-center">
           <h1>NEW ARRIVALS!!</h1>
         </div>
       </div>
@@ -96,7 +97,7 @@ include('functions/common_function.php')
         ?>
       </div>
       <div class="row btn-selengkapnya">
-        <div class="col-12 text-center">
+        <div class="col-md-12 text-center">
           <button type="button" class="btn btn-secondary"><a href="products.php" class="link">Lihat Semua</a></button>
         </div>
       </div>

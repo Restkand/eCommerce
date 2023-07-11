@@ -50,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $delete_cart = "DELETE FROM cart_details WHERE sub_order_id = $checkout_id";
     mysqli_query($con, $delete_cart);
 
-    
+    sendNotificationEmailtoCustomer($nama_penerima, $email_penerima, $invoice_number);
+    sendNotificationEmailtoAdmin($nama_penerima, $email_penerima, $invoice_number);
 
     $checkout_id = urlencode($checkout_id);
     header("Location: payment.php?checkout_id=$checkout_id");

@@ -36,6 +36,7 @@
 
           $invoice_number = $row['invoice_number'];
           $status_checkout = $row['status_checkout'];
+          $no_resi = $row['no_resi'];
 
           echo "<tr>";
           echo "<td>$invoice_number</td>";

@@ -36,6 +36,9 @@ if (isset($_GET['checkout_id'])){
         $update_status = "UPDATE checkout_details SET status_checkout = 'Sedang di Packing' WHERE sub_order_id = '$checkout_subid'";
         mysqli_query($con,$update_status);
 
+        $update_status_pembayaran = "UPDATE bukti_pembayaran SET status_pembayaran= 'Terkonfirmasi' WHERE sub_order_id = '$checkout_subid'";
+        mysqli_query($con,$update_status_pembayaran);
+
         $checkout_subid = urlencode($checkout_subid);
         header("Location: detail_checkout.php?detail_checkout=$checkout_subid");
         exit;

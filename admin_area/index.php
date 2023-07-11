@@ -9,6 +9,8 @@ if(!isset($_SESSION["login"])){
 
 include('../includes/connect.php');
 include('../functions/admin_sort.php');
+include('../functions/report_function.php');
+
 
 global $con;
 
@@ -45,6 +47,17 @@ if(isset($_POST['search_data_order'])){
       echo "<script>alert('Product tidak ditemukan')</script>";
     }
   }
+
+  if(isset($_POST['jurnal_penjualan'])){
+    header("Location:  jurnalPenjualan.php");
+    exit;
+    }
+
+  if(isset($_POST['jurnal_pembelian'])){
+    header("Location:  jurnalPembelian.php");
+    exit;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +69,9 @@ if(isset($_POST['search_data_order'])){
     <link rel="icon" href="../assets/favicon/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/CSS/report.css">
     <title>Dashboard Admin</title>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <style>
     .container {
       margin-top: 50px;
@@ -97,7 +112,7 @@ if(isset($_POST['search_data_order'])){
                 <!-- Navbar Items -->
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                     </li>
                     <!-- DropDown Brands -->
                     <li class="nav-item dropdown">
@@ -174,34 +189,50 @@ if(isset($_POST['search_data_order'])){
         if(isset($_GET['insert_category'])){
             include('insert_categories.php');
         }
-        if(isset($_GET['insert_brand'])){
+        elseif(isset($_GET['insert_brand'])){
             include('insert_brands.php');
         }
-        if(isset($_GET['insert_product'])){
+        elseif(isset($_GET['insert_product'])){
             include('insert_product.php');
         }
-        if(isset($_GET['view_product'])){
+        elseif(isset($_GET['view_product'])){
             include('view_product.php');
         }
-        if(isset($_GET['view_category'])){
+        elseif(isset($_GET['view_category'])){
             include('view_category.php');
         }
-        if(isset($_GET['view_brand'])){
+        elseif(isset($_GET['view_brand'])){
             include('view_brand.php');
         }
-        if(isset($_GET['all_order'])){
+        elseif(isset($_GET['all_order'])){
             include('all_order.php');
         }
-        if(isset($_GET['unpaid_order'])){
+        elseif(isset($_GET['unpaid_order'])){
             include('unpaid_order.php');
         }
-        if(isset($_GET['packing_order'])){
+        elseif(isset($_GET['packing_order'])){
             include('packing_order.php');
         }
-        if(isset($_GET['sent_order'])){
+        elseif(isset($_GET['sent_order'])){
             include('sent_order.php');
         }
-        ?>
+        else{
+            include('report_sales.php');
+            include('report_categorySale.php');
+            include('report_locationSale.php');
+            echo '            
+            <form action="" method="POST" enctype="multipart/form-data">
+            <div class="row mt-5">
+                <div class="col-6 d-flex justify-content-end">
+                    <button class="btn btn-primary" type="submit" name="jurnal_pembelian" id="jurnal_pembelian">Jurnal Pembelian</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-primary" type="submit" name="jurnal_penjualan" id="jurnal_penjualan">Jurnal Penjualan</button>
+                </div>
+            </div>
+            </form>';
+        }        
+?>
     </div>
 
 

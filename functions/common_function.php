@@ -25,7 +25,7 @@ function get_products(){
         $gender_id = $row['gender_id'];
         echo 
         "
-            <div class='col-md-3'>
+            <div class='col-sm-12 col-md-3'>
               <div class='cardbox-group'>
                 <div class='card border-0' style='width: 18rem;'>
                 <a href='product_details.php?product_id=$product_id'>
@@ -67,7 +67,7 @@ function get_product_retail(){
             $gender_id = $row['gender_id'];
             echo 
             "
-                <div class='col-md-3'>
+                <div class='col-sm-6 col-md-4 col-xl-3'>
                   <div class='cardbox-group'>
                     <div class='card border-0' style='width: 18rem;'>
                     <a href='product_details.php?product_id=$product_id'>
@@ -107,7 +107,7 @@ function get_uniqe_categories(){
       $gender_id = $row['gender_id'];
       echo 
       "
-          <div class='col-md-3'>
+          <div class='col-sm-6 col-md-4 col-xl-3'>
             <div class='cardbox-group'>
               <div class='card border-0' style='width: 18rem;'>
               <a href='product_details.php?product_id=$product_id'>
@@ -151,7 +151,7 @@ function get_uniqe_retail_brands(){
       $gender_id = $row['gender_id'];
       echo 
       "
-          <div class='col-md-3'>
+          <div class='col-sm-6 col-md-4 col-xl-3'>
             <div class='cardbox-group'>
               <div class='card border-0' style='width: 18rem;'>
               <a href='product_details.php?product_id=$product_id'>
@@ -238,7 +238,7 @@ function get_uniqe_retail_category(){
       $gender_id = $row['gender_id'];
       echo 
       "
-          <div class='col-md-3'>
+          <div class='col-sm-6 col-md-4 col-xl-3'>
             <div class='cardbox-group'>
               <div class='card border-0' style='width: 18rem;'>
               <a href='product_details.php?product_id=$product_id'>
