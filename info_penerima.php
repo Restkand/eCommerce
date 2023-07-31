@@ -43,6 +43,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $weight = '1000';
     $total_price_product;
 
+    // Periksa Kupon Diskon
+    // $query = "SELECT * FROM cart_details WHERE ip_address = '$get_ip_add'";
+    // $result = mysqli_query($con, $query);
+    // if (mysqli_num_rows($result) > 0){
+    //   while($row = mysqli_fetch_array($result)){
+    //     $kupon_id = $row['kupon_id'];
+    //   }
+    //   $query_kupon = "SELECT * FROM kupon_diskon WHERE kupon_id = '$kupon_id'";
+    //   $result_kupon = mysqli_query($con, $query_kupon);
+    //     if (mysqli_num_rows($result_kupon) > 0) {
+    //         while($row = mysqli_fetch_array($result_kupon)){
+    //             $kupon_id = $row['kupon_id'];
+    //             $diskon_kupon = $row['diskon_kupon'];
+    //             // $jumlah_kupon = $row['jumlah_kupon'];
+
+    //             // $jumlah_kupon = $jumlah_kupon - 1;
+
+    //             // $update_jumlah_kupon = "UPDATE kupon_diskon SET jumlah_kupon = '$jumlah_kupon' WHERE kupon_id = '$kupon_id'" ;
+    //             $total_price_product = $total_price_product - $diskon_kupon;
+    //           }
+    //       }
+    //  } 
+
     // Mendapatkan ongkos kirim menggunakan API RajaOngkir
     $cost = $data->get_cost($kota_pengirim, $kota_penerima, $weight,$total_price_product);
 
@@ -118,6 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
                   <a  href="cek_pesanan.php">CEK PESANAN</a>
+                  <a href="return_product.php">RETURN</a>
                   <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>
@@ -215,7 +239,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                           </div>
                       </div>
                   <?php } ?>
-                  <p class="item-price">Total Price : Rp <?php echo $formatted_total_price ?></p>
+                  <?php 
+                  $query = "SELECT * FROM cart_details WHERE ip_address = '$get_ip_add'";
+                  $result = mysqli_query($con, $query);
+                  if (mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_array($result)){
+                      $kupon_id = $row['kupon_id'];
+                    }
+                    $query_kupon = "SELECT * FROM kupon_diskon WHERE kupon_id = '$kupon_id'";
+                    $result_kupon = mysqli_query($con, $query_kupon);
+                      if (mysqli_num_rows($result_kupon) > 0) {
+                          while($row = mysqli_fetch_array($result_kupon)){
+                              $diskon_kupon = $row['diskon_kupon'];
+                              $after_diskon = $total_price - $diskon_kupon;
+                            }
+                          $formatted_diskon_price = number_format($diskon_kupon, 0, '.', '.');
+                          $formatted_after_diskon = number_format($after_diskon, 0, '.', '.');
+                          echo '<p class="item-price">Subtotal Price : Rp '. $formatted_total_price .'</p>';
+                          echo '<p class="item-price">Diskon Kupon : Rp '. $formatted_diskon_price .'</p>';
+                          echo '<p class="item-price">Total Price : Rp '. $formatted_after_diskon .'</p>';
+                        }
+                        else {
+                          echo '<p class="item-price">Total Price : Rp '. $formatted_total_price .'</p>';
+                        }
+                   } 
+                  ?>
                   <!-- Add more items here -->
                 </div>
               </div>

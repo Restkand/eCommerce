@@ -175,7 +175,26 @@
           $invoice_number = $row['invoice_number'];
           $no_resi = $row['no_resi'];
           $status_checkout = $row['status_checkout'];
+          
+          $select_query_cv = "SELECT * FROM report_return WHERE invoice_number = '$invoice_number'";
+          $result_query_cv = mysqli_query($con, $select_query_cv);
+          while($row = mysqli_fetch_array($result_query_cv)){
+              $resi_return = $row['resi_return'];
+          }
+        
+          if ($status_checkout == "Return"){
+            echo "<tr>";
+            echo "<td>$invoice_number</td>";
+            echo "<td>$resi_return</td>";
+            echo "<td>$status_checkout</td>";
+            echo "<td>";
+            echo "<a href='detail_checkout.php?detail_checkout=$checkout_id' class='btn btn-primary'>Detail Order</a> ";
+            echo "<a href='edit_order.php?edit_order=$checkout_id' class='btn btn-danger'>Edit Order</a>";
+            echo "</td>";
+            echo "</tr>";
+          }
 
+          else {
           echo "<tr>";
           echo "<td>$invoice_number</td>";
           echo "<td>$no_resi</td>";
@@ -185,7 +204,7 @@
           echo "<a href='edit_order.php?edit_order=$checkout_id' class='btn btn-danger'>Edit Order</a>";
           echo "</td>";
           echo "</tr>";
-
+          }
           $previous_checkout_id = $checkout_id;
         }
       }

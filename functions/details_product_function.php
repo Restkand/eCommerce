@@ -53,9 +53,20 @@ function generateProductViewer(){
           $result_query = mysqli_query($con, $select_query);
           // $row = mysqli_fetch_assoc($result_query);
           // echo $row['product_title'];
+
+          $select_detailsQuery = "SELECT * FROM detail_products where product_id=$product_id";;
+          $result_detailsQuery = mysqli_query($con, $select_detailsQuery);
+          while($row = mysqli_fetch_assoc($result_detailsQuery)){
+            $product_size = $row['size'];
+            $product_lebar = $row['lebar'];
+            $product_panjang = $row['panjang'];
+            $product_kondisi = $row['product_condition'];
+          }
+
           while($row = mysqli_fetch_assoc($result_query)){
             $product_id = $row['product_id'];
             $product_title = $row['product_title'];
+            $product_kode = $row['kode_produk'];
             $product_desc = $row['product_desc'];
             $product_image1 = $row['product_image1'];
             $product_image2 = $row['product_image2'];
@@ -65,7 +76,20 @@ function generateProductViewer(){
             $brand_id = $row['brand_id'];
             $gender_id = $row['gender_id'];
             $sold_out = $row['sold_out'];
-            
+
+            $select_brandQuery = "SELECT * FROM brands where brand_id=$brand_id";;
+            $result_brandQuery = mysqli_query($con, $select_brandQuery);
+            while($row = mysqli_fetch_assoc($result_brandQuery)){
+                $brand_title = $row['brand_title'];
+            }
+
+            $select_genderQuery = "SELECT * FROM genders where gender_id=$gender_id";;
+            $result_genderQuery = mysqli_query($con, $select_genderQuery);
+            while($row = mysqli_fetch_assoc($result_genderQuery)){
+                $product_gender = $row['gender_product'];
+            }
+
+
             if($sold_out == false){
                 // Output the HTML and JavaScript code using echo
                 echo '<div class="container">
@@ -75,6 +99,15 @@ function generateProductViewer(){
                     </div>
                     <div class="col-lg-12 col-xl-6">
                         <h2 class="mb-3">'.$product_title.'</h2>
+                        <p class="mb-2">Deskripsi Produk:</p>
+                        <p class="" style="margin-bottom:0;">Kode Produk : '. $product_kode .'</p>
+                        <p class="" style="margin-bottom:0;">Gender : '. $product_gender .'</p>
+                        <p class="" style="margin-bottom:0;">Brand : '. $brand_title .'</p>
+                        <p class="" style="margin-bottom:0;">Size : '. $product_size .'</p>
+                        <p class="" style="margin-bottom:0;">Lebar : '. $product_lebar .'cm</p>
+                        <p class="" style="margin-bottom:0;">Panjang : '. $product_panjang .'cm</p>
+                        <p class="mb-3">Kondisi : '. $product_kondisi .'</p>
+                        
                         <p class="mb-3">'.$product_desc.'</p>
                         <p class="mb-3">RP '.$formatted_price.'</p>
                         <a href="products.php?add_to_cart='.$product_id.'"><button class="btn btn-secondary add-to-cart-button">Masukan Ke Keranjang</button></a>
@@ -135,15 +168,15 @@ function generateProductViewer(){
           echo '<script>
           window.addEventListener(\'DOMContentLoaded\', function() {
               var mainImage = document.getElementById(\'mainImage\');
-              mainImage.style.width = "400px";
-              mainImage.style.height = "400px";
+              mainImage.style.width = "370px";
+              mainImage.style.height = "370px";
           });
 
           function changeImage(imageUrl) {
               var mainImage = document.getElementById(\'mainImage\');
               mainImage.src = imageUrl;
-              mainImage.style.width = "400px";
-              mainImage.style.height = "400px";
+              mainImage.style.width = "370px";
+              mainImage.style.height = "370px";
 
               var thumbnailImages = document.getElementsByClassName(\'thumbnail-image\');
               for (var i = 0; i < thumbnailImages.length; i++) {

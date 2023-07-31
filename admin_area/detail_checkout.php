@@ -75,6 +75,16 @@
             header("Location:  detail_checkout.php?detail_checkout=$checkout_subid");
             exit;
         }
+
+        if(isset($_POST['resi_return'])){
+            header("Location:  resi_return.php?checkout_id=$checkout_subid");
+            exit;
+        }
+
+        if(isset($_POST['cek_unbox'])){
+            header("Location:  check_unboxing.php?checkout_id=$checkout_subid");
+            exit;
+        }
 ?>
 
 <!DOCTYPE html>
@@ -191,6 +201,20 @@
         <?php if($status_checkout == "Pesanan di Terima") {?>
         <div class="text-center">
             <!-- <h3>Pesanan Di Terima</h3> -->
+        </div>
+        <?php } ?>
+        <?php if($status_checkout == "Return") {?>
+        <div class="text-center">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="row mt-3">
+                <div class="col-6 d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit" name="resi_return" id="resi_return">Resi Return</button>
+                </div>
+                <div class="col-6 d-flex justify-content-start">
+                    <button class="btn btn-primary" type="submit" name="cek_unbox" id="xek_unbox">Cek Unboxing</button>
+                </div>
+            </div>
+        </form>
         </div>
         <?php } ?>
         <?php if($status_checkout == "Cancel") {?>

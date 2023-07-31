@@ -83,8 +83,6 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" name="insert_category"  value="Insert Categories">Update Category</button>
             </div>
-
-
         </form>
     </div>
 

@@ -169,6 +169,7 @@
                     <option value="Sedang di Packing">Sedang di Packing</option>
                     <option value="Sedang di Kirim">Sedang di Kirim</option>
                     <option value="Pesanan di Terima">Pesanan di Terima</option>
+                    <option value="Return">Return</option>
                     <option value="Cancel">Cancel</option>
                 </select>
             </div>

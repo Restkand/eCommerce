@@ -16,6 +16,10 @@
   overflow: hidden;
 }
 
+p {
+  margin-bottom: 0px !important;
+}
+
 .thumbnail-image img {
   -o-object-fit: cover;
      object-fit: cover;

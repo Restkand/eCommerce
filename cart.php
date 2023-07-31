@@ -2,6 +2,33 @@
 include('includes/connect.php');
 include('includes/footer.php');
 include('functions/common_function.php');
+
+if(isset($_POST['checkout'])){
+    global $con;
+    $get_ip_add = getIPAddress();
+    $kode_kupon = $_POST['kode_kupon'];
+    if (!empty($kode_kupon)){
+    $query = "SELECT * FROM kupon_diskon WHERE nama_kupon = '$kode_kupon'";
+    $result = mysqli_query($con, $query);
+        if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_array($result)){
+                $kupon_id = $row['kupon_id'];
+            }
+            $update_sub_orderId = "UPDATE cart_details SET kupon_id = '$kupon_id' WHERE ip_address = '$get_ip_add'";
+            mysqli_query($con, $update_sub_orderId);
+
+            header("Location: cart.php?sub_checkout");
+            exit;
+        }
+        else{
+            echo "<script>alert('Kode kupon tersebut tidak ditemukan')</script>";
+        }
+    }
+    else{
+        header("Location: cart.php?sub_checkout");
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +65,7 @@ include('functions/common_function.php');
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
                   <a  href="cek_pesanan.php">CEK PESANAN</a>
+                  <a href="return_product.php">RETURN</a>
                   <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>
@@ -122,8 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $result_products_quantity = mysqli_query($con, $update_cart);
             }
             $updatedQuantities[$product_id] = $submittedQuantity;
-            
-
         }
 
     }
@@ -179,17 +205,25 @@ while ($row = mysqli_fetch_array($result_query)) {
                     </div>
                 </div>
             </div>
+                <!-- Summary Total -->
                 <div class="col-md-4">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body ">
+                            <form action="" enctype="multipart/form-data" method="POST">
+                                <h5 class="card-title">Kode Kupon</h5>
+                                <div class="row">
+                                <div class="item-kode-kupon">
+                                    <input type="text" class="form-control" name="kode_kupon" id="kode_kupon" placeholder="Masukkan Kode Kupon">
+                                </div>
+                                </div>
+                            <hr>
                             <h5 class="card-title">Order Summary</h5>
-                            <div class="order-details">
                                 <div class="row">
                                     <div class="col-7"><strong>Subtotal:</strong></div>
                                     <div class="col-5"><strong>RP <?php echo $formatted_total_price ?></strong></div>
                                 </div>
-                                <a href="cart.php?sub_checkout" class="btn btn-primary btn-checkout">Checkout</a>
-                            </div>
+                                <button type="submit" class="btn btn-primary" name="checkout"  value="Checkout">Checkout</button>
+                            </form>
                         </div>
                     </div>
                 </div>

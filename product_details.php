@@ -39,6 +39,7 @@ include('functions/details_product_function.php')
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
                   <a  href="cek_pesanan.php">CEK PESANAN</a>
+                  <a href="return_product.php">RETURN</a>
                   <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>

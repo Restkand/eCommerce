@@ -123,6 +123,7 @@ if(isset($_POST['search_data_order'])){
                         <li><a class="dropdown-item" href="index.php?unpaid_order">Unpaid Orders</a></li>
                         <li><a class="dropdown-item" href="index.php?packing_order">Packing Orders</a></li>
                         <li><a class="dropdown-item" href="index.php?sent_order">Sent Orders</a></li>
+                        <li><a class="dropdown-item" href="index.php?return_order">Return Orders</a></li>
                         <li><a class="dropdown-item" href="index.php?all_order">All Orders</a></li>
                     </ul>
                     </li>
@@ -157,6 +158,15 @@ if(isset($_POST['search_data_order'])){
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="index.php?insert_brand">Insert Brands</a></li>
                         <li><a class="dropdown-item" href="index.php?view_brand">View Brands</a></li>
+                    </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Kupon
+                        </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="index.php?insert_kupon">Insert Kupon Baru</a></li>
+                        <li><a class="dropdown-item" href="index.php?view_kupon">View Kupon</a></li>
                     </ul>
                     </li>
                     <!-- Close DropDown Brands -->
@@ -215,6 +225,15 @@ if(isset($_POST['search_data_order'])){
         }
         elseif(isset($_GET['sent_order'])){
             include('sent_order.php');
+        }
+        elseif(isset($_GET['return_order'])){
+            include('return_order.php');
+        }
+        elseif(isset($_GET['insert_kupon'])){
+            include('insert_kupon.php');
+        }
+        elseif(isset($_GET['view_kupon'])){
+            include('view_kupon.php');
         }
         else{
             include('report_sales.php');

@@ -81,6 +81,7 @@ if (isset($_GET['checkout_id'])){
               <div class="col nav-item text-center">
                   <a href="products.php">PRODUK</a>
                   <a  href="cek_pesanan.php" class="activeNav">CEK PESANAN</a>
+                  <a href="return_product.php">RETURN</a>
                   <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>
@@ -101,7 +102,8 @@ if (isset($_GET['checkout_id'])){
                   <li>Nama Penerima: John Doe</li>
               </ul>
               <p>Jumlah pembayaran: Rp <?php echo "$harga_format"; ?></p>
-              <p>Mohon segera melakukan pembayaran untuk pesanan <b><?php echo "$invoice_number"?></b></p>
+              <p>Mohon segera lakukan pembayaran dalam waktu 1 x 24 jam untuk pesanan <b><?php echo "$invoice_number"?></b></p>
+              <p>Pesan</p>
           </div>
         </div>
       </div>

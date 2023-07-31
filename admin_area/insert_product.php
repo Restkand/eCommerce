@@ -3,6 +3,7 @@
     if(isset($_POST['insert_product'])){
 
         $product_title =$_POST['product_title'];
+        $kode_produk =$_POST['kode_produk'];
         $product_desc =$_POST['product_desc'];
         $product_keyw =$_POST['product_keyw'];
         $product_categories =$_POST['product_categories'];
@@ -10,7 +11,12 @@
         $product_genders =$_POST['product_genders'];
         $product_price =$_POST['product_price'];
         $product_soldout="false";
-    
+        
+        $product_size =$_POST['size'];
+        $lebar_produk =$_POST['lebar'];
+        $panjang_produk =$_POST['panjang'];
+        $product_condition =$_POST['condition'];
+
         // Access Images
         $product_image1 = $_FILES['product_image1']['name'];
         $product_image2 = $_FILES['product_image2']['name'];
@@ -31,11 +37,23 @@
             move_uploaded_file($temp_image3, "../assets/img/product_images/$product_image3");
         
             //  insert query
-            $insert_products = "INSERT INTO products (product_title,product_desc,product_keywords,category_id,brand_id,gender_id,product_image1,product_image2,product_image3,product_price,sold_out,date) 
-            VALUES ('$product_title','$product_desc', '$product_keyw', '$product_categories', '$product_brands','$product_genders', '$product_image1', '$product_image2', '$product_image3', '$product_price','$product_soldout', NOW())";
+            $insert_products = "INSERT INTO products (product_title,kode_produk,product_desc,product_keywords,category_id,brand_id,gender_id,product_image1,product_image2,product_image3,product_price,sold_out,date) 
+            VALUES ('$product_title','$kode_produk','$product_desc', '$product_keyw', '$product_categories', '$product_brands','$product_genders', '$product_image1', '$product_image2', '$product_image3', '$product_price','$product_soldout', NOW())";
             $result_query = mysqli_query($con,$insert_products);
             if($result_query){
-                echo "<script>alert('products has been inserted successfully')</script>";
+                
+                $sub_kodeProduk_query=" SELECT * FROM products WHERE kode_produk = '$kode_produk'";
+                $result_kodeProduk_query = mysqli_query($con, $sub_kodeProduk_query);
+                while ($row = mysqli_fetch_array($result_kodeProduk_query )) {
+                    $product_id = $row['product_id'];
+                }
+
+                $insert_detailProducts = "INSERT INTO detail_products (product_id,size,lebar,panjang,product_condition) 
+                VALUES('$product_id','$product_size','$lebar_produk','$panjang_produk','$product_condition')";
+                $result_detailQuery = mysqli_query($con,$insert_detailProducts);
+                if($result_detailQuery){
+                    echo "<script>alert('products has been inserted successfully')</script>";
+                }
             }
         }
     }
@@ -50,6 +68,12 @@
             <label for="product-title" class="from-label"> Product Title</label>
             <input type="text" name="product_title" id="product_title" class="form-control" placeholder="Enter product title" autocomplete="off" required="required">
         </div>
+        
+        <!-- Keywords Product -->
+        <div class="form-outline mb-4 w-50 m-auto">
+            <label for="product-keyw" class="from-label"> Kode Produk</label>
+            <input type="text" name="kode_produk" id="kode_product" class="form-control" placeholder="Enter product code" autocomplete="off" required="required">
+        </div> 
 
         <!-- Description Product -->
         <div class="form-outline mb-4 w-50 m-auto">
@@ -126,6 +150,30 @@
             <label for="product-image3" class="from-label"> Product Image 3</label>
             <input type="file"  accept="image/*" name="product_image3" id="product_image3" class="form-control">
         </div> 
+        
+        <!-- Product Size -->
+        <div class="form-outline mb-4 w-50 m-auto">
+            <label for="product-price" class="from-label"> Product Size</label>
+            <input type="text" name="size" id="size" class="form-control" placeholder="Enter product size" autocomplete="off" required="required">
+        </div>
+
+        <!-- Product Lebar -->
+        <div class="form-outline mb-4 w-50 m-auto">
+            <label for="product-price" class="from-label"> Lebar Produk</label>
+            <input type="text" name="lebar" id="lebar" class="form-control" placeholder="Enter lebar produk (cm)" autocomplete="off" required="required">
+        </div>
+
+        <!-- Product Panjang -->
+        <div class="form-outline mb-4 w-50 m-auto">
+            <label for="product-price" class="from-label"> Panjang Produk</label>
+            <input type="text" name="panjang" id="panjang" class="form-control" placeholder="Enter panjak produk (cm)" autocomplete="off" required="required">
+        </div>
+
+        <!-- Product Condition -->
+        <div class="form-outline mb-4 w-50 m-auto">
+            <label for="product-price" class="from-label"> Product Condition</label>
+            <input type="text" name="condition" id="condition" class="form-control" placeholder="Enter product condition" autocomplete="off" required="required">
+        </div>
 
         <!-- Product Price -->
         <div class="form-outline mb-4 w-50 m-auto">

@@ -19,6 +19,10 @@ include('functions/common_function.php');
     <meta name="keywords" content="meonthrift, fashion preloved, gaya unik, eksklusif, stylish, harga terjangkau">
     <meta name="author" content="Meonthrift">
     <style>
+    .card-img-top {
+    width: 90%;
+  }
+    
     .container-table {
       margin-top: 50px;
     }
@@ -56,6 +60,7 @@ include('functions/common_function.php');
               <div class="col nav-item text-center">
                   <a href="products.php" class="activeNav">PRODUK</a>
                   <a  href="cek_pesanan.php">CEK PESANAN</a>
+                  <a href="return_product.php">RETURN</a>
                   <a href="about_us.php">TENTANG KAMI</a>
               </div>
           </div>

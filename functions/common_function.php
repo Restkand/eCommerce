@@ -576,6 +576,8 @@ function info_checkout(){
 
 function info_product_checkout(){
   global $con;
+  $get_ip_add = getIPAddress();
+
   if (isset($_GET['checkout_id'])){
     $checkout_subid = $_GET['checkout_id'];
     echo ' 
@@ -614,13 +616,40 @@ function info_product_checkout(){
           $ongkos_kirim = $row['ongkos_kirim'];
           $total_harga = $row['total_harga'];
         }
-        echo '
-        <hr>
-        <p class="item-name">SubTotal : RP '.number_format($harga_product, 0, '.', '.').'</p>
-        <p class="item-name">Ongkos Kirim : RP '.number_format($ongkos_kirim, 0, '.', '.').' </p>
-        <p class="item-price">Total Price : RP '.number_format($total_harga, 0, '.', '.').'</p>
-        <!-- Add more items here -->
-      </div>';
+        
+        $query = "SELECT * FROM cart_details WHERE ip_address = '$get_ip_add'";
+        $result = mysqli_query($con, $query);
+        if (mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_array($result)){
+            $kupon_id = $row['kupon_id'];
+          }
+          $query_kupon = "SELECT * FROM kupon_diskon WHERE kupon_id = '$kupon_id'";
+          $result_kupon = mysqli_query($con, $query_kupon);
+            if (mysqli_num_rows($result_kupon) > 0) {
+                while($row = mysqli_fetch_array($result_kupon)){
+                    $diskon_kupon = $row['diskon_kupon'];
+                    $total_harga = $total_harga - $diskon_kupon;
+                  }
+                $formatted_diskon_price = number_format($diskon_kupon, 0, '.', '.');
+                $formatted_total_harga = number_format($total_harga, 0, '.', '.');
+                echo '<hr>';
+                echo '<p class="item-name">SubTotal : RP '.number_format($harga_product, 0, '.', '.').'</p>';
+                echo '<p class="item-name">Ongkos Kirim : Rp '.number_format($ongkos_kirim, 0, '.', '.').'</p>';
+                echo '<p class="item-name">Diskon Kupon : - Rp '. $formatted_diskon_price .'</p>';
+                echo '<p class="item-price">Total Price : Rp '. $formatted_total_harga .'</p>';
+                echo '</div>';
+              }
+            else{
+              echo '
+              <hr>
+              <p class="item-name">SubTotal : RP '.number_format($harga_product, 0, '.', '.').'</p>
+              <p class="item-name">Ongkos Kirim : RP '.number_format($ongkos_kirim, 0, '.', '.').' </p>
+              <p class="item-price">Total Price : RP '.number_format($total_harga, 0, '.', '.').'</p>
+              <!-- Add more items here -->
+            </div>';
+            }
+            }
+
   }
 }
 
