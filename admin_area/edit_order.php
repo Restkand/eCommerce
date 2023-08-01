@@ -46,35 +46,53 @@
 
             // Membuat query untuk update data
             $sql = "UPDATE checkout_details SET ";
+            $updatedFields = array();
+
             if (!empty($nama_penerima)) {
                 $sql .= "nama_penerima = '$nama_penerima', ";
+                $updatedFields[] = "nama_penerima";
             }
             if (!empty($telepon_penerima)) {
                 $sql .= "telepon_penerima = '$telepon_penerima', ";
+                $updatedFields[] = "telepon_penerima";
             }
             if (!empty($email_penerima)) {
                 $sql .= "email_penerima = '$email_penerima', ";
+                $updatedFields[] = "email_penerima";
             }
             if (!empty($alamat_penerima)) {
                 $sql .= "alamat_penerima = '$alamat_penerima', ";
+                $updatedFields[] = "alamat_penerima";
             }
             if (!empty($ongkir)) {
                 $sql .= "ongkir = '$ongkir', ";
+                $updatedFields[] = "ongkir";
             }
             if (!empty($status_checkout)) {
                 $sql .= "status_checkout = '$status_checkout', ";
+                $updatedFields[] = "status_checkout";
             }
             if (!empty($no_resi)) {
                 $sql .= "no_resi = '$no_resi', ";
+                $updatedFields[] = "no_resi";
             }
-            $sql = rtrim($sql, ', '); // Menghapus koma terakhir dari query
 
-            $sql .= " WHERE sub_order_id = $order_subid";
-            // Menjalankan query
-            $result = mysqli_query($con, $sql);
-            if ($result) {
-                echo "<script>alert('Order berhasil di edit')</script>";
+            // Menghapus koma terakhir dari query
+            $sql = rtrim($sql, ', ');
+
+            if (!empty($updatedFields)) {
+                $sql .= " WHERE sub_order_id = $order_subid";
+                // Menjalankan query
+                $result = mysqli_query($con, $sql);
+                if ($result) {
+                    echo "<script>alert('Order berhasil di edit')</script>";
+                } else {
+                    echo "<script>alert('Gagal melakukan update data')</script>";
+                }
+            } else {
+                echo "<script>alert('Tidak ada data yang dirubah')</script>";
             }
+
         }
         
 ?>

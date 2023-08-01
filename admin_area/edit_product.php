@@ -34,6 +34,13 @@
             $product_genders =$_POST['product_genders'];
             $product_price =$_POST['product_price'];
             $product_soldout=$_POST['product_soldout'];
+
+            if($product_soldout == "true"){
+                $product_soldout = true;
+            }
+            else{
+                $product_soldout = false;
+            }
     
         
             // Access Images
@@ -256,8 +263,8 @@
             <div class="form-group">
             <label for="product_genders">Product Terjual : </label>
                 <select name="product_soldout" id="" class="product_soldout">
-                 <option value="false">Belum Terjual</option>
-                 <option value="true">Terjual</option>
+                <option value="false">Belum Terjual</option>
+                <option value="true">Terjual</option>
                 </select>
             </div>
 
